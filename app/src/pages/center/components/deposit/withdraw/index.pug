@@ -1,0 +1,105 @@
+.withdraw
+  .first-step(v-if="!nextStepShow" v-loading="loading")
+    .money
+      i 总余额:
+        span ￥{{$fmoney(totalBalance, 2)}}
+      i 主钱包余额:
+        span ￥{{$fmoney(mainWallet, 2)}}
+    el-form.form(label-with="80px")
+      el-form-item(label="真实姓名")
+        span {{realname}}
+      el-form-item(label="银行账号")
+        el-select(v-model="bank" placeholder="请选择银行卡" @change="changeBankSelect")
+          el-option(v-for="item, index in bankColumns" :key="index" :label="item.name +'('+ item.card_number+')'" :value="item.id")
+        el-button.hollow.left6px(@click.stop.prevent="updateCenterDialogConfig({ visible: true, group: 0, menu: 0, tab: 'bankManage' })") 新增银行卡
+      el-form-item(label="提款金额")
+        el-input(v-model="amount" type="number" :placeholder="minAmount + '~' + maxAmount")
+      el-form-item(label="提款密码")
+        el-input(type="password" v-model="withdrawPwd" placeholder="输入密码")
+        el-button.hollow.left6px(@click.stop.prevent="updateWithdrawDialogVisible(true)") 忘记密码
+      el-form-item.limit
+        span 提款下限:￥{{minAmount}}
+        span 提款上限:￥{{maxAmount}}
+        span 剩余免手续费次数:{{noFeeTimes}}
+      el-form-item
+        el-button(type="primary" :loading="preAppLoading" @click="preApplication") 预申请
+  .second-step(v-if="nextStepShow")
+
+    el-table.table1(:data="withdrawTableData" border style="width: 100%")
+      el-table-column(label="提款金额" min-width="80" align="center" prop="money")
+      el-table-column(label="常态稽核" min-width="80" align="center")
+        template(slot-scope="scope")
+          span(:class="scope.row.administrativeFee == 0 ? 'pass' : 'nopass'") {{scope.row.administrativeFee == 0 ? '通过': '不通过'}}
+      el-table-column(label="优惠稽核" min-width="80" align="center")
+        template(slot-scope="scope")
+          span(:class="scope.row.couponFee == 0 ? 'pass' : 'nopass'") {{scope.row.couponFee == 0 ? '通过' : '不通过'}}
+      el-table-column(label="手续费" min-width="80" align="center" prop="procedureFee")
+      el-table-column(label="实收金额" min-width="80" align="center")
+        template(slot-scope="scope")
+          span ￥{{$fmoney(scope.row.realMoney, 2)}}
+      el-table-column(label="申请时间" min-width="250" align="center" prop="applyTime")
+      el-table-column(label="操作" min-width="300" align="center")
+        template(slot-scope="scope") 
+          div(v-if="scope.row.realMoney > 0")
+            el-button(size="mini" type="primary"  @click="confirmWithdradal" :disabled="confirmLoading") 确认提款
+            el-button(size="mini" @click="goBackFirstStep") 取消
+          div(v-else)
+            span 申请出款金额不足扣除费用，无法进行提款操作。
+            el-button(size="mini" @click="goBackFirstStep") 返回
+  
+    el-table.table1(:data="auditListTableData" border style="width: 100%")
+      el-table-column(label="起始时间" min-width="80" align="center")
+        template(slot-scope="scope")
+          span {{scope.row.start_time}}
+      el-table-column(label="结束时间" min-width="80" align="center")
+        template(slot-scope="scope")
+          span {{scope.row.end_time}}
+      el-table-column(label="存款金额" min-width="80" align="center")
+        template(slot-scope="scope")
+          span {{scope.row.deposit_money}}
+      el-table-column(label="优惠金额" min-width="80" align="center")
+        template(slot-scope="scope")
+          span {{scope.row.coupon_money}}
+      el-table-column(label="有效投注" min-width="80" align="center")
+        el-table-column(v-for="(item, index) in betList" :key="index" :label="item.name" min-width="40" align="center")
+          template(slot-scope="scope")
+            span {{scope.row.betdetail[index].validbet}}
+      el-table-column(label="稽核常态" min-width="80" align="center")
+        el-table-column(label="常态打码要求" min-width="80" align="center")
+          template(slot-scope="scope")
+            span {{scope.row.withdraw_bet}}
+        el-table-column(label="是否通过" min-width="80" align="center")
+          template(slot-scope="scope")
+            span(:class="scope.row.is_no_check ? '':(!!scope.row.is_principal_pass ? 'pass' : 'nopass')") {{scope.row.is_no_check ? '免稽核':(!!scope.row.is_principal_pass ? '通过': '未通过')}}
+        el-table-column(label="扣除行政费" min-width="80" align="center")
+          template(slot-scope="scope")
+            span {{scope.row.deduct_admin_fee}}
+      el-table-column(label="优惠稽核" min-width="80" align="center")
+        el-table-column(label="优惠打码量要求" min-width="80" align="center")
+          template(slot-scope="scope")
+            span {{scope.row.withdraw_bet_coupon}}
+        el-table-column(label="是否通过" min-width="80" align="center")
+          template(slot-scope="scope")
+            span(:class="scope.row.is_no_check ? '':(!!scope.row.is_coupon_pass ? 'pass' : 'nopass')") {{scope.row.is_no_check ? '免稽核':(!!scope.row.is_coupon_pass ? '通过' : '未通过')}}
+        el-table-column(label="扣除优惠" min-width="80" align="center")
+          template(slot-scope="scope")
+            span {{scope.row.deduct_coupon}}
+    el-row(type="flex" justify="center" align="middle")
+      el-col(:span="2")
+        p 稽核结论：
+      el-col(:span="22")
+        p 优惠稽核：{{couponFee == 0 ? '通过': '不通过'}} {{couponFee == 0 ? '' : '须扣除优惠￥'+couponFee}}
+        p 常态稽核：{{administrativeFee == 0 ? '通过' : '不通过'}} {{administrativeFee == 0 ? '' : '须扣除行政费￥'+administrativeFee}}
+        p 手续费：出款手续费 ￥{{procedureFee}}
+        p 总计扣除：出款手续费￥{{procedureFee}} + 扣除优惠￥{{couponFee}} + 扣除行政费￥{{administrativeFee}} = ￥{{$fmoney(administrativeFee + procedureFee + couponFee, 2)}}
+    
+
+  .note
+    p 流程说明:
+    p 第一步, 输入提款金额与提款密码, 并点击【预申请】
+    p 第二步, 待该笔预申请的状态变更为"待确认", 即可提交申请出款
+
+  //- 试玩和忘记密码的弹框 
+  //- dialog-form(ref="dialogForm")
+
+  

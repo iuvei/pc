@@ -1,0 +1,50 @@
+.game-wrap(v-if="isVisible")
+  .bg-text
+  .title-wrap
+    .title 电子游艺
+      .sub ELECTRONIC
+  .frame-wrap
+    .bg-frame
+    .head-wrap
+      .text 超级彩金 
+      .money CNY{{ jackpotTotalLabel }}
+    .body-wrap
+      .left-wrap
+        .arrow-wrap(@click="onMenuUpClick")
+          img.normal(src="./img/arrow-1-1.svg")
+          img.active(src="./img/arrow-1-2.svg")
+        .menu-wrap
+          ul(:style="{ top: menuTop+'px' }")
+            li(v-for="item, index in list" :key="index" :class="{ active: isActiveMenu(item) }" @click="onMenuClick(item)")
+              .line
+              img.logo(:src="getAPILogoPath(item)")
+              div
+                .name {{ getAPIName(item) }}
+                .sub MicroGaming
+              img.hot(src="./img/hot.png")
+            li(v-if="list.length > 5" v-for="item, index in list" :key="index+100" :class="{ active: isActiveMenu(item) }" @click="onMenuClick(item)")
+              .line
+              img.logo(:src="getAPILogoPath(item)")
+              div
+                .name {{ getAPIName(item) }}
+                .sub MicroGaming
+              img.hot(src="./img/hot.png")
+        .arrow-wrap(@click="onMenuDownClick")
+          img.normal(src="./img/arrow-2-1.svg")
+          img.active(src="./img/arrow-2-2.svg")
+      .right-wrap
+        .list-wrap(v-if="activeItem.games")
+          .item(v-for="item, index in activeItem.games" :key="index")
+            .mask
+              .btn.start(:class="{ demo: !item.support_demo || userType === '1' }" @click="onPlayClick(item)") 开始游戏
+              .btn.try(v-if="item.support_demo && userType != '1'" @click="onTryClick(item)") 试玩游戏
+            div.icon 
+              img(:src="item.img_url")
+            .name-wrap
+              .name {{ item.name }}
+              .star-wrap
+                img(v-for="i in item.star || 5" src="./img/star-1.png")
+                img(v-for="i in (5 - item.star || 0)" src="./img/star-2.png")
+        .money-wrap(v-if="activeItem.games && activeItem.jackpot != 0")
+          .name {{ getAPIName(activeItem) }}超级奖池
+          .money {{ formatMoney(activeItem.jackpot) }} 元

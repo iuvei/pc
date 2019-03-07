@@ -1,0 +1,90 @@
+.ad-float
+  position fixed
+  top 0
+  z-index 2000
+
+  .left-top
+    position fixed
+    left 0
+    width 200px
+    height 200px
+    z-index 2001
+
+    &:hover
+      a
+        height 634px
+        opacity 1
+        -moz-transform skew(180deg)
+        -ms-transform skew(180deg)
+        -o-transform skew(180deg)
+        -webkit-transform skew(180deg)
+        transform skew(180deg)
+
+    a
+      position absolute
+      top 0
+      left 0
+      width 282px
+      opacity 0
+      -moz-transform skewX(145deg)
+      -ms-transform skewX(145deg)
+      -o-transform skewX(145deg)
+      -webkit-transform skewX(145deg)
+      transform skewX(145deg)
+      -moz-transform-origin left top
+      -ms-transform-origin left top
+      -o-transform-origin left top
+      -webkit-transform-origin left top
+      transform-origin left top
+      -moz-transition all 0.6s
+      -o-transition all 0.6s
+      -webkit-transition all 0.6s
+      transition all 0.6s
+
+    span
+      position absolute
+      top 0
+      left 0
+      width 28px
+      height 28px
+      background url('./img/close.png') no-repeat center center
+      cursor pointer
+
+  .left-center
+    position fixed
+    height 100vh
+    display flex
+    align-items center
+    left 0
+
+    .center
+      position relative
+
+      span
+        position absolute
+        top 0
+        right 0
+        width 28px
+        height 28px
+        background url('./img/close.png') no-repeat center center
+        cursor pointer
+
+  .right-top
+    position fixed
+    right 0
+
+    span
+      position absolute
+      top 0
+      right 0
+      width 28px
+      height 28px
+      background url('./img/close.png') no-repeat center center
+      cursor pointer
+
+// 适配全屏弹窗时滑动条消失导致位置偏移
+.dialog-css, .el-popup-parent--hidden
+  .home
+    .ad-float
+      .right-top
+        right 17px

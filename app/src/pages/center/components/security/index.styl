@@ -1,0 +1,103 @@
+$red-color = #e6382f
+
+.center-security
+  .container
+    .level
+      height 48px
+      line-height 48px
+      background-color #ffffff
+      padding 0 17px 0 10px
+
+      .level-wrap
+        float left
+        width 60%
+        display flex
+        align-items center
+
+        >span
+          color #1B1D26
+
+          &.prompt
+            color #333333
+            margin-left 10px
+
+        p
+          width 160px
+          height 8px
+          float left
+          margin-left 10px
+
+      >span
+        font-size 12px
+        float right
+        color #909399
+
+    .section
+      .top
+        justify-content space-between
+        display flex
+        margin 19px 17px 9px 10px
+
+        .title
+          display inline-block
+          font-size 14px
+          color #909399
+          position relative
+
+        .p-title
+          color #909399
+          font-size 12px
+
+      .content
+        display flex
+        background-color #ffffff
+        padding 18px 17px 23px 12px
+        align-items center
+        position relative
+
+        .line
+          height 1px
+          width 94%
+          background-color #DDDDDD
+          position absolute
+          right 0
+          top 79px
+          z-index 100
+
+        img
+          margin-right 23px
+
+        .text
+          flex 1
+
+          p
+            &.label
+              color #1B1D26
+              font-weight bold
+
+            &.value
+              color #666666
+              margin-top 10px
+
+              span
+                font-size 12px
+
+                &.forget-widthdraw
+                  color #999
+
+                &.cursor
+                  cursor pointer
+                  color #e6382f
+
+        .start
+          width 56px
+          height 28px
+          background-color $red-color
+          border-radius 3px
+
+        .edit
+          width 54px
+          height 26px
+          border 1px solid #D3D4D6
+          color #1B1D26
+          border-radius 3px

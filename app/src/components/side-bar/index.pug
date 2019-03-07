@@ -1,0 +1,22 @@
+ul.side-bar(v-if="isShow" :style="{'height':(serviceList.length-count)*53+countHeight+'px','right':showWay?'0':'-138px'}" :class="{'no-right':!showWay}")
+  li(
+    v-for="item,index in serviceList" 
+    :key="index" 
+    @click.stop.prevent="clickItem(item)"
+    :class="item.class"
+  )
+    div
+      .wrap
+        .img-wrap
+          img(:src="require(`./img/${item.key}.svg`)")
+        p.label {{item.label}}
+      p.value(v-if="item.key==='wx'||item.key==='qq'") {{item.content}}
+  img.top-bg(src="./img/top-bg.png")
+  .bottom(@click.stop.prevent="showWayFun" :class="{'horizontal-bottom':!showWay}") 
+    template(v-if="showWay")
+      img(src="./img/close.svg")
+      span 关闭
+    template(v-else)
+      span(v-if="!showWay") 展
+      span(v-if="!showWay") 开
+  

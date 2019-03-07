@@ -1,0 +1,6 @@
+.type-wrap(v-if="isVisible")
+  .box(v-for="item, index in list" :key="index" :style="{ backgroundImage: `url(${getImagePath(item.gameType)})` }")
+    .border
+    .mask(@click="onEnterClick(item)") 
+      .btn(:class="`_${item.gameType}`") 进入游戏
+  .box(v-if="list.length === 1" :style="{ backgroundImage: `url(${getImagePath(0)})` }")

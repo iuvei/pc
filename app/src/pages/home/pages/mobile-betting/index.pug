@@ -1,0 +1,77 @@
+.mobile-betting
+  .container
+    ul.top
+      li(v-for="step,index in stepsArr" :key="index" @click.stop.prevent="clickTitle(index)")
+        span.num(:class="{'red-bg':selectStep===index}")
+          i {{step.num}}
+        span.title(:class="{'red':selectStep===index}") {{step.title}}
+      .line-wrp(:style="{transform:`translateX(${selectStep>0?selectStep===1?462:886:0}px)`}")
+        .triangle
+      .l
+    .page-wrap
+      ul.page(:style="{width:stepsArr.length*1200+'px',transform:`translateX(${-selectStep*1200}px)`}")
+        li.page1
+          .h5-url-wrap
+            .h5-url 手机浏览器输入
+              span {{h5_url}}
+              .copy(
+                @click.stop.prevent="onCopy(h5_url)"
+              ) 复 制
+                 
+          ul.link
+            li.app
+              .code
+                img(:src="qrcode.app")
+              p 
+                img(src="./img/android.svg")
+                img(src="./img/ios.svg" style="margin-left:3px")
+                span APP 客户端下载
+            li.h5
+              .code
+                img(:src="qrcode.h5")
+              p 扫一扫，马上进入 H5 端
+          
+        li.page2
+          .pic
+            img(src="./img/two.png")
+          .con
+            .t-title
+              span.line 
+              span.t IPHONE安装教程
+            .t-con
+              ul.step-wrap
+                li(
+                  v-for="i,j in numArr"
+                  :key="j"
+                ) 
+                  .circle(v-if="j===numArr.length-1") 
+                    img(v-if="j===numArr.length-1" src="./img/gou.png")
+                  .circle(v-else) {{i}}
+                    
+                  .line(v-show="j!==numArr.length-1")
+              ul.step-list
+                li(
+                  v-for="str,i in contentArr"
+                  :key="i"
+                ) {{str}}
+        li.page3
+          .pic
+            img(src="./img/three.png")
+          .con
+            .t-title
+              span.line 
+              span.t 便捷存取款
+            .t-con
+              .one-title 存取款、洗码方便
+              .one-con 全新手机投注，开放存款、投注、取款等网页版本的大部分功能便捷的操作功能，注重用户体验，让您每时每刻都能感受到彩票娱乐对您的贴心关怀，彩票娱乐与您同在。
+              .one-title 多种存款方式任您选择
+              ul.way
+                li(
+                  v-for="way,index in saveMoneyArr"
+                  :key="index"
+                )
+                  img(:src="way.img")
+                  p {{way.title}}
+
+
+          

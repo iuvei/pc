@@ -1,0 +1,33 @@
+.recharge(v-loading="isLoading")
+  template(v-if="!isLoading")
+    .empty(v-if="!offlineData&&!onlineData") 
+      .empty-wrap 
+        img(src="./img/empty.png")
+        p 很抱歉，目前尚无充值通道，请
+          span(@click.stop.prevent="goKefu") 联系客服
+
+  
+    //- 聚合支付模式使用（含公司转账和同级的线上充值列表展开）
+    //- .tabs
+    //-   .tab(v-if="offlineData" @click.stop.prevent="tabsClick(0)" :class="{active:activeName===0}") 公司转账
+        
+    //-   //- 线上充值  
+    //-   template(v-if="onlineData&&onlineData.list")
+    //-     .tab(v-for="obj,index in onlineData.list"  @click.stop.prevent="tabsClick(offlineData?(index+1):index)" :key="index" :class="{active:activeName===(offlineData?(index+1):index)}") {{obj.name}}
+    
+    //- template(v-if="activeName===0&&offlineData")
+    //-   company(:data="offlineData" )
+
+    //- template(v-else-if="activeName>=0&&onlineData")
+    //-   other-pay(:key="activeName" :data="onlineData" :number="offlineData?activeName-1:activeName")
+    
+    //- 非聚合支付模式（线上充值、公司入款）
+    .tabs
+      .tab(v-if="isOnlinePaymentVisiable" @click.stop.prevent="tabsClick(0)" :class="{active : activeName === 0}") 线上充值
+      .tab(v-if="offlineData" @click.stop.prevent="tabsClick(isOnlinePaymentVisiable ? 1 : 0)" :class="{active:activeName === (isOnlinePaymentVisiable ? 1 : 0)}") 公司转账
+        
+    template(v-if="activeName===0 && isOnlinePaymentVisiable")
+      OnlinePayment(:data="onlineData")
+
+    template(v-if="activeName === (isOnlinePaymentVisiable ? 1 : 0) && offlineData")
+      company(:data="offlineData")

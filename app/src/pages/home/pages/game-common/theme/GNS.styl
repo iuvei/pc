@@ -1,0 +1,92 @@
+$deep = #2272B5
+$light = #C3D8E9
+
+.theme-GNS
+  .top
+    .input
+      border 1px solid $deep
+
+    .search
+      background-color $deep
+
+  .game-menu
+    background-color $deep
+
+    .warp
+      .menu-list
+        .list-item
+          color $light
+
+          .secondmenu
+            color $deep
+
+            .thirdmenu
+              color $deep
+
+              li:hover, li.active
+                color $light
+                background-color $deep
+
+            li:hover, li.active
+              color $light
+              background-color $deep
+
+          span.active
+            color $deep
+
+          &:hover
+            span
+              color $deep
+
+  .recommend
+    .btn
+      background-color $light
+
+    .swiper-pagination-recommend
+      .swiper-pagination-bullet
+        background-color $light
+
+      .swiper-pagination-bullet-active
+        background-color $deep
+
+    .item
+      .shadow
+        span
+          background-color $deep
+
+  .recommends
+    .title
+      border-bottom 2px solid $deep
+
+      .text
+        background-color $deep
+
+      .more
+        color $light
+
+        .el-icon-caret-right
+          color $deep
+
+    .game-list
+      .el-pagination.is-background
+        .btn-prev, .btn-next, .el-pager li
+          background-color $light
+
+        .el-pager li:not(.disabled).active
+          background-color $deep
+
+      .list
+        .shadow
+          span
+            background-color $deep
+
+  .bottom
+    background-color $deep
+
+  .type-menu
+    .item
+      .active_bg
+        background-color $deep
+
+        span
+          border-color transparent transparent $deep

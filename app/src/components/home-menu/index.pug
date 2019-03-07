@@ -1,0 +1,14 @@
+.home-menu
+  .wrap
+    .logo
+      a(href="/")
+        img(:src="logo1")
+        img(:src="logo2")
+    .menu
+      label(v-for="item, index in menus" :key="index" v-if="item.is_display" :style="`color: ${item.color}`" @click.stop.prevent="onMenuClick(item)") {{ item.name }}
+        .hot(v-if="item.is_hot")
+        .drop-wrap(v-if="item.children && item.children.length > 0")
+          .activity(v-if="item.sub_title_display" @click.stop.prevent) {{ item.sub_title_name }}
+          .submeun-wrap
+            .submenu(v-for="i in getSubmenuCount(item)" :key="i")
+              .subitem(v-for="_item, _index in getSubmenuList(item, i)" :key="_index" @click.stop.prevent="onMenuClick(_item)") {{ _item.name }}

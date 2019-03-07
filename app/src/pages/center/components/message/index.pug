@@ -1,0 +1,8 @@
+div
+  el-tabs(v-model="activeTab")
+    el-tab-pane(label="重要消息" name="important")
+      important(v-if="activeTab === 'important'")
+    el-tab-pane(label="一般消息" name="normal")
+      normal(v-if="activeTab === 'normal'")
+    el-tab-pane(label="公告消息" name="notice")
+      notice(v-if="activeTab === 'notice'")

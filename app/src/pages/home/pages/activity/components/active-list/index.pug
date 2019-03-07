@@ -1,0 +1,12 @@
+.activelist
+  .item(v-for="item in data" :key="item.id")
+    .border
+    .img(:style="{backgroundImage: `url(${item.cover})`}")
+    .right
+      .title(:title="item.title") {{item.title}}
+      .description(v-html="item.description")
+      .time 有效时间: {{item.begin_time}}--{{item.end_time}}
+      .btns
+        span.detail(@click="onDetailClick(item)") 优惠详情
+        span.apply(v-if="item.type === 1 && !item.is_auto_apply" @click="onApplyClick(item)") 立即申请
+

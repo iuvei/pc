@@ -1,0 +1,13 @@
+.ad-float
+  .left-top(v-if="isLeftTopVisible" :style="{ backgroundImage: `url(${leftTopData.pic})` }")
+    a(:href="leftTopData.link" :style="{ backgroundImage: `url(${leftTopData.pic_detail})` }" target="_blank")
+    span(@click="isLeftTopVisible = false" title="关闭")
+  .left-center(v-if="isLeftCenterVisible")
+    .center
+      a(:href="leftCenterData.link" target="_blank")
+        img(:src='leftCenterData.pic')
+      span(@click="isLeftCenterVisible = false" title="关闭")
+  .right-top(v-if="isRightTopVisible")
+    a(:href="rightTopData.link" target="_blank")
+      img(:src='rightTopData.pic')
+    span(@click="isRightTopVisible = false" title="关闭")

@@ -1,0 +1,141 @@
+.live-wrap
+  width 1200px
+  height 464px
+  margin 0 auto
+  padding 20px 0
+  position relative
+
+  .bg-text
+    position absolute
+    top 0
+    background url('./img/bg-text.png') no-repeat center
+    width 1882px
+    height 232px
+    left 50%
+    margin-left -941px
+    z-index 1
+
+  .title
+    display flex
+    position relative
+    z-index 2
+
+    .name
+      font-size 18px
+      color #4D4F57
+      font-weight 800
+
+      .sub
+        font-size 10px
+        color #191C22
+        font-weight 500
+        margin-top 4px
+
+  .swiper-container
+    height 380px
+    padding-top 10px
+    z-index 2
+
+  .table-container
+    display flex
+    padding-top 40px
+    position relative
+    z-index 2
+
+  .swiper-slide, .item
+    cursor pointer
+    width 288px
+    height 346px
+    position relative
+
+    &:hover
+      .border
+        opacity 1
+
+    &+.item
+      margin-left 16px
+
+    &.pending
+      cursor default
+
+      &:hover
+        margin-top 0
+
+    .border
+      position absolute
+      opacity 0
+      transition opacity 0.2s ease
+      width 100%
+      height 100%
+      border 4px solid #FFDE01
+      box-sizing border-box
+      -moz-box-sizing border-box
+      -webkit-box-sizing border-box
+
+    img
+      width 288px
+
+    .desc
+      width 280px
+      height 28px
+      line-height 14px
+      padding-left 18px
+      position absolute
+      font-size 14px
+      letter-spacing 1px
+      color #fff
+      left 0
+      bottom 2px
+
+    .mask
+      width 100%
+      height 100%
+      position absolute
+
+      .btn
+        width 100px
+        height 36px
+        line-height 35px
+        background #fff
+        border-radius 18px
+        font-size 16px
+        text-align center
+        position relative
+        top 260px
+        left 170px
+        font-weight bold
+        letter-spacing 2px
+        text-indent 4px
+
+        &.lebo
+          color #F67035
+
+        &.bg
+          color #00D6D6
+
+        &.og
+          color #F7A400
+
+        &.ebet
+          color #98349E
+
+        &.ag
+          color #6265DE
+
+        &.bbin
+          color #f33834
+
+  .swiper-pagination
+    bottom 0px
+
+  >>>
+    .swiper-pagination-bullet
+      width 36px
+      height 4px
+      border-radius 0
+
+      &:focus
+        outline none
+
+    .swiper-pagination-bullet-active
+      background #F4002B

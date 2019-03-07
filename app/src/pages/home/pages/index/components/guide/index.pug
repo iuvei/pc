@@ -1,0 +1,13 @@
+.guide-wrap
+  template(v-if="token.length === 0")
+    .box(v-for="index in unLoginIndex" :key="index" @click="onItemClick(index)")
+      i.index_guide(:class="`icon-${index + 1}`")
+      div
+        .label {{ list[index].label }}
+        .desc {{ list[index].desc.toUpperCase() }}
+  template(v-else)
+    .box(v-for="index in loginIndex" :key="index" @click="onItemClick(index)")
+      i.index_guide(:class="`icon-${index + 1}`")
+      div
+        .label {{ list[index].label }}
+        .desc {{ list[index].desc.toUpperCase() }}

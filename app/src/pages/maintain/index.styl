@@ -1,0 +1,31 @@
+.wscn-container
+  background-color #2b273a
+  position fixed
+  height 100%
+  width 100%
+
+  &.freeze
+    background-color #F5F5F5
+
+  .wscn-maintaining, .wscn-freeze
+    width 840px
+    margin 0 auto
+    text-align center
+    margin-top 100px
+    position relative
+
+  .wscn-maintaining
+    div
+      color green
+      position absolute
+      bottom 20px
+      left 35%
+
+      p:first-child
+        text-align left
+
+  .wscn-freeze
+    p
+      color #1B1D26
+      margin-top 20px
+      font-size 14px

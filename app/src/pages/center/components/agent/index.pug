@@ -1,0 +1,84 @@
+.agent-container
+  //- 代理账户及其状态，通过后的推广码
+  .basic-info(v-if="hasBound!=='unbind'")
+    .label 代理账户：
+    .value
+      span {{agentName}}
+      span.failed(v-if="hasBound==='failed'") 未通过
+  .basic-info(v-if="hasBound==='passed'")
+    .label 推广码：
+    .value 
+      span {{promotionCode}}
+
+  //- 状态按钮
+  .status-buttons
+    .denied(v-if="hasBound==='failed'")
+      el-button(type="primary" size="large", @click="toAgentAdmin('register')") 重新申请
+    .on-progress(v-if="hasBound==='auditing'")
+      span 审核中
+      p 平台将在1-2个工作日内审核完成
+
+  //- 未绑定代理
+  .without-binding(v-if="hasBound==='unbind'")
+    .title 如何做代理
+    .flow-process
+      .pic-wrapper
+        img(:src="require('./img/one.png')")
+        p 注册
+      .arrow
+      .pic-wrapper
+        img(:src="require('./img/two.png')")
+        p 推广
+      .arrow
+      .pic-wrapper
+        img(:src="require('./img/three.png')")
+        p 赚佣
+    .buttons
+      .left
+        el-button.solid(  @click="toAgentAdmin('register')") 申请成为代理
+        el-button.hollow( @click="isDialogVisible=true", :style="{color: '#666', borderColor: '#D3D4D6'}") 已有代理账号？点击这里快速绑定
+      .right
+        el-button.btn(type="text" @click="toAgentAdmin()" size="small") 查看更多加盟信息
+          i(class="el-icon-arrow-right" style="margin-left:3px")
+  //- 已绑定代理
+  .with-binding(v-if="hasBound==='passed'")
+    .label 会员推广链接：
+    .links
+      el-table(:data="tableData" stripe border v-loading="isLoading")
+        el-table-column(label="下级会员推广链接" prop="link")
+        el-table-column(label="下级会员推广二维码" prop="link")
+          template(slot-scope="scope")
+            //- 展示二维码, 备注：size=60时，canvas高度60，外层div实际渲染为68px, 需要加style限制高度
+            QrcodeVue(:value="scope.row.link", :id="scope.row.link", size="60", :style="{height: '60px'}")
+            //- 下载二维码使用
+            QrcodeVue(:value="scope.row.link", :id="`download_large_${scope.row.link}`", :size="600", v-show="false")
+        el-table-column(label="操作")
+          template(slot-scope="scope")
+            //- el-button(type="text" size="small", @click="saveQRCode(scope.row.link)") 保存二维码
+            span.save(@click="saveQRCode(scope.row.link)") 保存二维码
+    .buttons
+      el-button.solid(type="primary" size="small", @click="toAgentAdmin('background')" v-if="status===1") 查看更多代理信息
+      el-button.solid(type="primary" size="small", @click="onAgentForbidden" v-else) 查看更多代理信息
+
+  //- 绑定代理
+  el-dialog.four-eight(
+    title="绑定代理"
+    :visible.sync="isDialogVisible"
+    append-to-body
+    width="480px"
+    @close="onCancel('form')")
+    el-form(:model="form" size="small" ref="form", :rules="rules" label-width="100px")
+      el-form-item(label="代理账户:", prop="agentName")
+        el-input(v-model="form.agentName")
+      el-form-item(label="密码:", prop="password" style="margin-bottom:30px")
+        el-input(v-model="form.password", type="password")
+      el-form-item
+        el-button.solid.btns-wrap.cancel(type="cancel", size="large", @click="onCancel('form')") 取消        
+        el-button.solid.btns-wrap.confirm( size="large", @click="submitForm('form')") 确定绑定
+  //- 跳转代理后台注册，PC端显示等待页面
+  //- .awaiting-register(v-show="awaitingRegisterVisible")
+  //-   .el-dialog__header
+  //-     span.el-dialog__title 注册状态
+  //-   .register-buttons
+  //-     el-button(type="primary" size="large", @click="onRegisterSucceed") 刷新绑定状态
+  //-     el-button(type="cancel" size="large", @click="awaitingRegisterVisible=false") 稍后注册

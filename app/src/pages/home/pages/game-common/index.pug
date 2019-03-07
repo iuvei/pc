@@ -1,0 +1,38 @@
+.game-common(:class="partnerClass" :style="{backgroundImage: isPage ? `url(${bg_name})`:''}")
+  common-header(:options="options")
+  .game-menu(v-if="menu.length > 0")
+    .warp
+      .menu-list
+        .list-item(v-for="item,index in menu" :key="item.id" v-if="index < 7")
+          span(:class="{active:current === item.id}" @click="(e)=>onTagChange(e,item.id,1)") {{item.name}}
+            i.el-icon-caret-bottom(v-if="item.second_menu && item.second_menu.length")
+          ul.secondmenu(v-if="item.second_menu && item.second_menu.length")
+            li(:class="{active:second_current === menu.id && current === item.id}" v-for="menu,i in item.second_menu" :key='menu.id' @click="(e)=>onTagChange(e,menu.id,2,item.id)") {{menu.name}}
+        .list-item(v-if="menu.length > 7")
+          span 更多
+            i.el-icon-caret-bottom
+          ul.secondmenu
+            li(v-for="item,index in menu" v-if="index > 6" :class="{active:current === item.id}" :key='item.id' @click="(e)=>onTagChange(e,item.id,1)") {{item.name}}
+              ul.thirdmenu(v-if="item.second_menu && item.second_menu.length")
+                li(:class="{active:second_current === menu.id && current === item.id}" v-for="menu,i in item.second_menu" :key='menu.id' @click="(e)=>onTagChange(e,menu.id,2,item.id)") {{menu.name}}
+  .api-ad(v-if="menu && menu.length && current === menu[0].id && AdList.length > 0")
+    swiper(v-if="AdList.length > 0" :options="swiperOption")
+      swiper-slide(v-for="item, index in AdList" :key="index")
+        a(v-if="item.link_pc && item.link_pc.length > 0" :href="item.link_pc" target="_blank")
+          img(:src="item.img_pc")
+        img(v-else :src="item.img_pc")
+      .swiper-pagination-ad(slot="pagination")
+  .recommends(v-if="menu && menu.length && current === menu[0].id")
+    .title
+      .text 推荐游戏
+      .more(@click="toRecommends") 更多游戏
+        i.el-icon-caret-right
+    recommend(type="swiper")
+  .recommends
+    .title(v-if="menu && menu.length && current === menu[0].id")
+      .text 热门游戏
+    game-list(:gametype="gameType" :params="{tag_id:tagId,partner_id:options.partner_id}")
+  .bottom(:class="{isPage: isPage}")
+  egame-sidebar(v-if="isPage")
+    
+  

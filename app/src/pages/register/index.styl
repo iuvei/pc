@@ -1,0 +1,148 @@
+.register-bg
+  background #f0f0f2 url('./img/bg.png') no-repeat center top
+
+  .register
+    width 1200px
+    margin 0 auto
+    padding 30px 0 35px
+    display flex
+    justify-content space-between
+
+    .left-side
+      width 248px
+      height 1048px
+      background #ddd
+
+      .banner
+        height 242px
+        width 100%
+        background url('./img/banner@2x.png') no-repeat center / auto 100%
+
+      .title
+        height 54px
+        width 100%
+        background #ED071F url('./img/icon-hot@2x.png') no-repeat 46px center / auto 40%
+        text-align center
+        line-height 54px
+        font-size 20px
+        color #ffffff
+
+      ul.list
+        height 752px
+        overflow-y auto
+
+        li
+          height 54px
+          width 100%
+          font-size 14px
+          border-bottom 1px solid #ddd
+          background #E7E8E9
+          padding 0 16px 0 40px
+          box-sizing border-box
+          display flex
+          align-items center
+          justify-content space-between
+          cursor pointer
+
+          &:hover
+            color #fff
+            background #000
+
+          div
+            flex-grow 2
+            padding-left 16px
+
+          img.logo
+            height 40px
+            width 40px
+            margin 7px 0
+
+    .register-side
+      width 938px
+      background #fff
+
+      .tit
+        text-align center
+        padding 10px 0
+        border-bottom 1px solid #F4F5FA
+
+        .chinese
+          font-size 30px
+          color #ED071F
+          line-height 42px
+
+        .english
+          font-size 12px
+          color #434343
+          line-height 18px
+
+      ul.remark
+        font-size 14px
+        font-weight bold
+        line-height 24px
+        padding-left 90px
+
+        li
+          color #999999
+
+      .reg-form
+        .form-tit
+          font-size 16px
+          font-weight bold
+          color #181819
+          line-height 32px
+          padding 16px 0 0 90px
+
+        >>>
+          .el-input
+            width 320px
+            height 40px
+
+          .email-and-mobile
+            display flex
+            flex-direction column
+
+            .valid
+              width 320px
+              display flex
+              justify-content space-between
+              margin-top 6px
+
+              .el-input
+                width 180px
+
+              .el-button
+                width 130px
+
+          .agreement
+            color #F4002B
+            cursor pointer
+
+          .confirm, .reset
+            width 100px
+            font-size 16px
+            height 36px
+            line-height 36px
+            padding 0
+
+          .confirm
+            margin-left 62px
+
+          .reset
+            background #999999
+            color #ffffff
+
+          .pic-code
+            width 320px
+            display flex
+            justify-content space-between
+            align-items center
+
+            .el-input
+              width 180px
+
+            img
+              width 130px
+              height 38px
+              border 1px solid #ccc
+              border-radius 4px

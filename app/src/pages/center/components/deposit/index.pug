@@ -1,0 +1,8 @@
+div
+  el-tabs(v-model="activeTab")
+    el-tab-pane(label="在线充值" name="recharge") 
+      recharge(v-if="activeTab === 'recharge'")
+    el-tab-pane(label="线上提款" name="withdraw") 
+      withdraw(v-if="activeTab === 'withdraw'")
+    el-tab-pane(label="存提记录" name="record") 
+      record(v-if="activeTab === 'record'")

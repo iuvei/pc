@@ -1,0 +1,18 @@
+.app-wrap
+  .content
+    .title-wrap
+      .title 随时随地 轻松投注
+      .sub MOBILE BETTING ANYTIME ANYWHERE
+    .desc 我们的手机投注平台面向全网玩家，提供近百款老虎机百家乐以及彩票游戏投注，线上存取及额度转换，一键操作，整合同步账号和资料传输，达到随时随地不间断娱乐的享受概念。
+    .qcode-wrap
+      .box(v-if="qrcode.app")
+        img.qcode(:src="qrcode.app")
+        .name-wrap
+          img.android(src="./img/android.svg")
+          img.ios(src="./img/ios.svg")
+          span APP 客户端下载
+      .box(v-if="qrcode.h5")
+        img.qcode(:src="qrcode.h5")
+        .name-wrap
+          span 扫一扫，马上进入 H5 端
+    img.app-image(src="./img/app.png")

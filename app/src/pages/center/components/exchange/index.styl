@@ -1,0 +1,111 @@
+$red-color = #e6382f
+
+.center-exchange
+  height 660px
+  overflow-y auto
+
+  .cursor
+    cursor pointer
+
+  .el-icon-refresh
+    margin-left 10px
+    font-weight bold
+    cursor pointer
+    font-size 16px
+    padding 0
+    background transparent
+    border 0
+    color #909399
+
+    &.is-disabled
+      background-color transparent !important
+
+    &.red
+      color $red-color
+
+  p
+    margin 0
+
+  .row
+    display flex
+    justify-content space-between
+    background-color #FFFFFF
+    height 48px
+    line-height 48px
+    padding 0 17px 0 10px
+
+    .left
+      p
+        margin-right 56px
+        color #1B1D26
+        float left
+        font-size 12px
+
+        .red
+          color $red-color
+          font-size 16px
+
+  .row1
+    margin-top 20px
+    padding 13px 17px 0 10px
+    background-color #FFFFFF
+    height 556px
+
+    .change-form
+      display flex
+
+      .exchange-in
+        margin-right 20px
+
+        .title
+          color #1B1D26
+          font-size 12px
+          margin-bottom 9px
+          height 12px
+
+        .select
+          overflow hidden
+
+          >>>
+            .el-form-item
+              margin-bottom 15px
+
+        .confirm-btn
+          background-color $red-color
+          font-size 14px
+          width 90px
+          height 40px
+          border-color $red-color
+
+    .tip
+      color #999999
+      font-size 12px
+      margin-bottom 19px
+
+    .table-wrap
+      display flex
+      margin-top 4px
+      min-height 80px
+      position relative
+
+      .table1
+        width 542px
+        // flex 1
+        margin 0
+
+        .balance
+          min-width 48px
+
+        .one-btn
+          width 56px
+          height 28px
+          border-color #D3D4D6
+          color #333333
+          font-size 14px
+
+        &:nth-child(3)
+          margin-left -1px
+
+    .center-exchange-dialog
+      .d-top
+        display flex

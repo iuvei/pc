@@ -1,0 +1,16 @@
+.transaction
+  .filter
+    el-form(:model="form" :inline="true" size="small" :label-position="'top'" @keyup.enter.native="onQueryClick" ref="form")
+      el-form-item(label="类型" prop="category")
+        el-select(v-model="form.category" placeholder="请选择")
+          el-option(v-for="item in optionTypes" :key="item.value" :label="item.label" :value="item.value")
+      el-form-item(label="时间范围")
+        day-picker(v-model="days" :defaultValue="[0,0]" ref="dayPicker")
+    .query.btn
+      el-button.solid(type="primary" @click="onQueryClick") 查询
+      el-button.hollow(@click="onResetClick") 重置
+  
+  .table
+    el-table(:data="tableData" stripe border style="width: 100%" v-loading="isLoading")
+      el-table-column(v-for="item, index in tableHead" :key="index" :label="item.label" :prop="item.prop" :width="item.width" :min-width="item.minWidth" :formatter="item.formatter")
+    el-pagination(@size-change="onPageSizeChange" @current-change="onCurrentChange" :current-page="page" :page-sizes="sizes" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total" background)

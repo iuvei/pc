@@ -1,0 +1,119 @@
+// element-ui dialog样式
+// 如果你的弹框是放在body里的话，样式就在这里写
+.el-input__inner, .el-select .el-input.is-focus .el-input__inner, .el-select .el-input__inner:focus, .el-input.is-active .el-input__inner, .el-input__inner:focus, .el-form-item.is-success .el-input__inner
+  border-color #808080
+
+.center-exchange-dialog
+  >>>
+    .el-dialog__body
+      padding 39px 30px 63px !important
+
+  .d-top
+    display flex
+    justify-content center
+    position relative
+
+    .t-l
+      text-align center
+      flex 1
+
+      img
+        width 88px
+        height 90px
+
+      p
+        text-align center
+
+        &.title
+          margin-top 18px
+          margin-bottom 19px
+          color #2A2C34
+          font-size 14px
+
+        &.red
+          color #E6382F
+          font-size 22px
+
+    .t
+      margin-top 30px
+      width 73px
+      text-align center
+
+      img
+        width 73px
+
+    .all-restore
+      width 98px
+      height 28px
+      line-height 28px
+      text-align center
+      color #1B1D26
+      font-size 14px
+      border 1px solid #D3D4D6
+      border-radius 14px
+      cursor pointer
+      padding 0 !important
+      margin-top 8px
+
+  .form
+    margin-top 35px
+
+    .select-wrap
+      display flex
+
+      .btns
+        flex 1
+
+      .select
+        margin-right 10px
+        width 280px
+
+        .el-form-item
+          width 280px
+          height 40px
+
+        .el-input .el-input__inner
+          height 40px
+          border-radius 3px
+
+        .num-wrap
+          width 100%
+
+          .num
+            width 84px
+            height 30px
+            line-height 32px
+            border 1px solid #D3D4D6
+            text-align center
+            font-size 14px
+            color #E6382F
+            border-radius 3px
+            margin-bottom 10px
+            margin-right 10px
+            float left
+            cursor pointer
+
+            &:hover
+              background #FFE4E4
+              color #E6382F
+              border-color #E6382F
+
+            &:nth-child(3n)
+              margin-right 0
+
+    .submit
+      background-color #E6382F
+      font-size 14px
+      width 90px
+      height 40px
+
+    .go
+      color #E6382F
+      font-size 14px
+      margin-top 72px
+      margin-left 19px
+
+    .tip
+      font-size 14px
+      color #999999
+      margin-top 9px

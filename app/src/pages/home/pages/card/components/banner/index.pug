@@ -1,0 +1,8 @@
+div
+  .banner-wrap
+    swiper(v-if="slides.length > 0" :options="swiperOption" ref="swiperBanner")
+      swiper-slide(v-for="item, index in slides" :key="index")
+        a(v-if="item.link_pc && item.link_pc.length > 0" :href="item.link_pc" target="_blank")
+          img(:src="item.img_pc")
+        img(v-else :src="item.img_pc")
+      .swiper-pagination(slot="pagination")

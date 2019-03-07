@@ -1,0 +1,16 @@
+.discount
+  .filter
+    el-form(:model="form" :inline="true" size="small" :label-position="'top'" @keyup.enter.native="onQueryClick")
+      el-form-item(label="时间")
+        day-picker(v-model="days" :defaultValue="[-30,0]" ref="dayPicker")
+      el-form-item(label="状态")
+        el-select(v-model="form.status" placeholder="请选择")
+          el-option(v-for="item in optionStatus" :key="item.value" :label="item.label" :value="item.value")
+    .query.btn
+      el-button.solid(type="primary" @click="onQueryClick") 查询
+      el-button.hollow(@click="onResetClick") 重置
+  
+  .table
+    el-table(:data="tableData" stripe border style="width: 100%" v-loading="isLoading")
+      el-table-column(v-for="item, index in tableHead" :key="index" :label="item.label" :prop="item.prop" :width="item.width" :min-width="item.minWidth" :formatter="item.formatter")
+    el-pagination(@size-change="onPageSizeChange" @current-change="onCurrentChange" :current-page="page" :page-sizes="sizes" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total" background)

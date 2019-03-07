@@ -1,0 +1,84 @@
+$bg_swiper_button = #CCCBCB
+$bg_swiper_button_active = #F4002B
+$bg_menu = #DDDDDD
+$font_color = #20222A
+$font_size = 16px
+$bg_active = #151526
+$color_active = #FFFFFF
+
+.type-menu
+  background $bg_menu
+  height 54px
+  position relative
+
+  >>>
+    .swiper-container
+      padding 0px 30px
+
+    .swiper-slide
+      width 190px
+      height 54px
+      box-sizing border-box
+      border-right 1px solid $bg_swiper_button
+
+  .swiper-button-prev, .swiper-button-next
+    width 30px
+    height 54px
+    top 0
+    margin 0
+    background-size 10px 18px
+    background-color $bg_swiper_button
+    background-image url('./img/left.png')
+
+    &:hover
+      background-color $bg_swiper_button_active
+      background-image url('./img/hover.png')
+      transform rotate(180deg)
+
+  .swiper-button-prev
+    left 0
+
+  .swiper-button-next
+    right 0
+    transform rotate(180deg)
+
+    &:hover
+      transform rotate(0deg)
+
+  .item
+    width 100%
+    height 100%
+    font-size $font_size
+    color $font_color
+    cursor pointer
+    display flex
+    align-items center
+    justify-content center
+
+    img
+      margin-right 10px
+
+    .active_bg
+      width 100%
+      position absolute
+      left 0
+      bottom 0
+      display none
+      height 4px
+      text-align center
+
+      span
+        display inline-block
+        width 0
+        height 0
+        border-width 0 6px 6px
+        position relative
+        top -12px
+        border-style solid
+
+    &.active
+      background-color #151526
+      color $color_active
+
+      .active_bg
+        display block

@@ -1,0 +1,13 @@
+
+  
+//- 忘记密码弹框
+el-dialog.four-eight(
+  ref="dialogForm"
+  :title="formColumn.title"
+  :visible="forgetDialogVisible"
+  :append-to-body='true'
+  width="480px"
+  @close="closeDialog"
+)
+  edit-form(:formColumn="formColumn" :form="dialogForm" :formRules="formRules" @tabClick="tabClick" :tabName="tabName")
+    

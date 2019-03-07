@@ -1,0 +1,79 @@
+.edit-form
+  //- tabs
+  el-tabs(
+    v-if="formColumn.tabs"
+    v-model="activeTabs" 
+    @tab-click="handleTabsClick"
+  )
+    el-tab-pane(
+      v-for="tab,index in formColumn.tabs"
+      :label="tab.label"
+      :name="tab.name"
+      :key="index"
+    ) 
+
+
+  //- 表单
+  el-form.form(
+    :model="form" 
+    ref="formDom" 
+    :rules="formRules" 
+    label-width="110px" 
+    size="mini" 
+    v-loading="loading" 
+    @submit.native.prevent @keyup.enter.native="handlerClick(formColumn.btns.length>=2?formColumn.btns[1]:formColumn.btns[0])"
+  )
+    el-form-item(
+      v-for="item,index in formColumn.cellGroup"
+      :key="index"
+      :label="item.label"
+      :prop="item.prop"
+    )
+      .wrap(v-if="item.type==='input'")
+        el-input(v-model="form[item.prop]" :type="item.password?'password':'text'"  :placeholder="item.placeholder" :disabled="item.Disable || false" )
+        el-button.code-btn(
+          type="text" 
+          @click="validatorButton(item)"
+          :disabled="item.disabled"
+          v-if="item.button"
+        ) {{item.button}}  
+        span.eye-btn(v-if="item.icon")
+          img(:src="item.icon" @click="item.iconEvent(item)")
+      
+      template(v-else-if="item.type==='date'")
+        el-date-picker(v-model="form[item.prop]" type="date" :placeholder="item.placeholder")
+      
+      template(v-else-if="item.type==='radio'")
+        el-radio-group(v-model="form[item.prop]")
+          el-radio(
+            v-for="sex in item.group"
+            :label="sex.id"
+            :key="sex.id"
+          ) {{sex.name}}
+      
+      template(v-else-if="item.type==='widthdrawPassword'")
+        withdraw-password(:resultForm="form" :resultKey="item.prop" :isReset="dialogVisible")
+      
+      template(v-else-if="item.type==='hit-check'")
+        .hit-check
+          el-checkbox(v-model="form[item.prop]")
+          span.hit-check-label(v-html="item.content" v-if="item.content")
+      
+      template(v-else-if="item.type==='text'")
+        span.text(style="line-height:46px;color:#434343;font-size:16px") {{form[item.prop]}}
+
+    p.footer(v-if="formColumn.footer" ) {{formColumn.footer}}
+    p(v-if="formColumn.customfooter" v-html="formColumn.customfooter")  
+    el-form-item.last-item
+      el-button.btns-wrap(
+        v-for="btn,index in formColumn.btns"
+        :key="index"
+        @click.stop.prevent="handlerClick(btn)"
+        :disabled="btn.disabled"
+        :class="[btn.type,btn.class?btn.class:'','solid']"
+      ) {{btn.label}}
+
+    el-form-item
+      slot
+
+  

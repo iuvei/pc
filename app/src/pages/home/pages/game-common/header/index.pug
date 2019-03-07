@@ -1,0 +1,8 @@
+.common-header
+  .top
+    .logo
+      img(:src="config && config.logo")
+      img(:src="config && config.text")
+    .gamesearch
+      input.input(v-model="gamename" :placeholder="placeholder")
+      i.search(@click="doSearch")

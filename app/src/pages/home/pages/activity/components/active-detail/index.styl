@@ -1,0 +1,54 @@
+$title_color = #EE071F
+$title_size = 22px
+$time_color = #1F212A
+
+.active-detail
+  width 1200px
+  margin 64px auto 50px
+  min-height 500px
+  background rgba(255, 255, 255, 1)
+  box-shadow 0px 2px 4px 0px rgba(0, 0, 0, 0.2)
+
+  .header
+    padding 30px 40px 20px
+    border-bottom 1px solid #DDDDDD
+    position relative
+
+    .title
+      color $title_color
+      font-size $title_size
+      margin-bottom 10px
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
+
+    .time
+      color $time_color
+      margin-top 5px
+
+    .back
+      position absolute
+      right 40px
+      top 30px
+      font-size 16px
+      color $title_color
+      cursor pointer
+
+      i
+        font-size 12px
+        margin-left 5px
+
+  .content
+    padding 30px 40px 100px
+
+    .cover
+      width 100%
+      max-height 240px
+      margin-bottom 30px
+
+    .content_pc
+      overflow hidden
+
+      >>>
+        img
+          max-width 100%

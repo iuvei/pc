@@ -1,0 +1,92 @@
+.lottery
+  background url('./img/bg.png') no-repeat top center
+
+  .wrap
+    width 1200px
+    margin auto
+    padding 50px 0 30px 0
+
+    .game
+      padding 20px 0
+      display flex
+      justify-content space-between
+      align-items center
+
+      .box
+        width 392px
+        height 432px
+        position relative
+        cursor pointer
+
+        &:hover
+          .border
+            opacity 1
+
+        &.pending
+          background url('./img/pending.png') no-repeat center center
+          display flex
+          flex-direction column
+          justify-content center
+          align-items center
+          cursor default
+
+          .title
+            font-size 32px
+            font-weight bold
+            color #484848
+            letter-spacing 2px
+
+          .sub-title
+            font-size 16px
+            font-weight bold
+            color #484848
+            margin-top 6px
+
+        .border
+          position absolute
+          opacity 0
+          transition opacity 0.2s ease
+          width 100%
+          height 100%
+          border 4px solid #FFDE01
+          box-sizing border-box
+          -moz-box-sizing border-box
+          -webkit-box-sizing border-box
+          z-index 2
+
+        .desc
+          width 100%
+          height 116px
+          text-align center
+          color #fff
+          position absolute
+          bottom 0
+
+          &.bbin
+            background-color #EE2F07
+
+          &.hclottery
+            background-color #E91760
+
+          .title-wrap
+            margin 20px 0 10px 0
+            display flex
+            align-items flex-end
+            justify-content center
+
+            img
+              height 26px
+              margin-right 9px
+
+            span
+              font-size 22px
+              font-weight bold
+              position relative
+
+          .info
+            font-size 14px
+            padding 0 30px
+            text-align left
+            letter-spacing 1px
+            line-height 30px
+            text-align center

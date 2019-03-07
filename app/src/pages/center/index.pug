@@ -1,0 +1,14 @@
+el-dialog.center(title="个人中心" width="1300px" top="10vh" :visible="centerDialogConfig.visible" @close="onClose" :close-on-click-modal="false")
+  //- 忘记提现密码的弹框（银行管理，线上提款，安全中心）
+  widthdraw-dialog
+  
+  .body-wrap
+    aside.menu-wrap
+      el-menu(:default-active="activeMenu.name" @select="onMenuSelect")
+        el-menu-item-group(v-for="item, index in groups" :key="index")
+          template(slot="title") {{ item.title }}
+          el-menu-item(v-for="_item, _index in item.menus" :key="_index" :index="_item.name")
+            img(:src="require(`./img/${_item.name}_${activeMenu.name === _item.name ? 2 : 1}.svg`)")
+            span(slot="title") {{ _item.title }}
+    section.content-wrap
+      component(v-if="centerDialogConfig.visible" :is="activeMenu.component")

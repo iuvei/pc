@@ -1,0 +1,38 @@
+.edit-info
+  template(v-loading="isLoading")
+    el-form.form(:model="form" ref="form" :rules="formRules" label-width="110px" size="mini")
+      //- :style="{'background-color':avater.img===form.avater_url?'red':'transparent'}"
+      //- 头像 
+      el-form-item(label="头像:" prop="avatar_url" style="height:100px")
+        .select-avater-wrap
+          .select-avater(:style="{'width':avaterArr.length*118+'px'}")
+            .avater-item(
+              v-for="avater,index in avaterArr"
+              :key="index"
+              :style="{'background-color':form.avatar_url===avater.img?'#e6382f':'transparent'}"
+              @click.stop.prevent="form.avatar_url=avater.img"
+            )
+              img(:src="require(`./../../img/${avater.img}`)")
+
+      el-form-item(
+        v-for="item,index in formColumn"
+        :key="index"
+        :label="item.label+':'"
+        :prop="item.prop"
+      )
+        template(v-if="item.type==='input'")
+          el-input(v-model="form[item.prop]" clearable :placeholder="item.disabled?'':'请输入'+item.label" :disabled="item.disabled || false")
+        template(v-else-if="item.type==='date'")
+          el-date-picker(v-model="form[item.prop]" type="date" :placeholder="'请输入'+item.label")
+        template(v-else-if="item.type==='radio'")
+          el-radio-group(v-model="form[item.prop]")
+            el-radio(
+              v-for="sex in item.group"
+              :label="sex.id"
+              :key="sex.id"
+            ) {{sex.name}}
+      el-form-item
+        el-button.solid.red-btn-260(@click.stop.prevent="submit" size="mini") 保存
+    
+
+  

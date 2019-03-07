@@ -1,0 +1,113 @@
+.bank-manage
+  //- 已添加银行卡的模板
+  div(v-loading="isLoading")
+    template(v-if="profileList.length>0")
+      .container1
+        el-button.solid.btn(@click.stop.prevent="dialogVisible=true") 新增银行卡
+        el-table(
+          :data="profileList"
+          border
+          max-height="300"
+        )
+          el-table-column(
+            v-for="column,index in tableColumn"
+            :key="index"
+            :prop="column.prop"
+            :width="column.width"
+            :min-width="column.minWidth"            
+            :label="column.label"
+          )
+          el-table-column(label="操作")
+            template(slot-scope="scope")
+              el-button.hollow(type="small" @click.stop.prevent="deleteFromId(scope.row.id)") 删除
+      .tip 
+        p.title 注意：
+        p.tip-content 提款银行最多只能绑定5张，如需绑定新银行卡请删减一张旧卡后再进行添加
+    //- 未添加银行卡的模板
+    template(v-else)
+      .container2
+        el-form.form(:model="form" :rules="formRules" label-width="110px" size="small" ref="form")
+          el-form-item(
+            v-for="item,index in formColumn"
+            :key="index"
+            :prop="item.prop"
+            :label="item.label+':'"
+            :style="{height:item.type==='textarea'?'80px':'40px'}"
+          )
+            template(v-if="item.type==='input'")
+              el-input(v-model="form[item.prop]" clearable :placeholder="'请输入'+item.label")
+            template(v-else-if="item.type==='text'")
+              span.text {{form[item.prop]}}
+            template(v-else-if="item.type==='textarea'")
+              el-input(v-model="form[item.prop]"  type="textarea"   clearable :placeholder="'请输入'+item.label")
+            template(v-else-if="item.type==='select'")
+              el-select(v-model="form[item.prop]" :placeholder="'请选择'+item.label")
+                el-option(
+                  v-for="opts in item.options"
+                  :key="opts.id"
+                  :label="opts.name"
+                  :value="opts.id"
+                )
+            template(v-else-if="item.type==='widthdrawPassword'")
+              div.withpassword
+                withdraw-password(style="width:240px" :resultForm="form" :resultKey="'withdraw_password'")
+                span.pas-tip(v-if="isSetPassword") {{isSetPassword===1?'还没设置？请点击':'忘记提现密码？请点击'}}
+                  span.cursor(@click.stop.prevent="updateWithdrawDialogVisible(true)") 这里
+          el-form-item
+            el-button.solid.red-btn-260(@click.stop.prevent="save"  :loading="isSave") 保存
+        
+      .tip  
+        p.title 温馨提示
+        p.tip-content 1.银行卡户名必须为持卡人姓名一致
+        p.tip-content 2.尚未实名认证的客户，首次录入持卡人的姓名将同步至真实姓名，真实姓名提交后不可修改，请谨慎操作。
+
+  //- 新增银行卡弹框
+  el-dialog.four-eight(
+    ref="dialog"
+    title="新增银行卡"
+    :visible.sync="dialogVisible"
+    :append-to-body='true'
+    width="480px"
+    @close="close"
+  )
+    el-form.form(:model="form" :rules="formRules" label-width="85px" size="small" ref="form")
+      el-form-item(
+        v-for="item,index in formColumn"
+        :key="index"
+        :prop="item.prop"
+        :label="item.label+':'"
+      )
+        template(v-if="item.type==='input'")
+          el-input(v-model="form[item.prop]" clearable :placeholder="'请输入'+item.label")
+        template(v-else-if="item.type==='text'")
+          span.text(style="height:46px;line-height:46px") {{form[item.prop]}}
+        template(v-else-if="item.type==='select'")
+          el-select(v-model="form[item.prop]" :placeholder="'请选择'+item.label")
+            el-option(
+              v-for="opts in item.options"
+              :key="opts.id"
+              :label="opts.name"
+              :value="opts.id"
+            )
+        template(v-else-if="item.type==='textarea'")
+          el-input(v-model="form[item.prop]"  type="textarea"   clearable :placeholder="'请输入'+item.label")
+        template(v-else-if="item.type==='widthdrawPassword'")
+          withdraw-password(:resultForm="form" :resultKey="'withdraw_password'" :isReset="dialogVisible")
+      el-form-item
+        el-button.solid.red-btn-260(@click.stop.prevent="save" :loading="isSave") 保存
+  
+  //- 删除银行卡的弹框
+  el-dialog.four-eight(
+    ref="dialog1"
+    title="删除银行卡"
+    :visible.sync="deletedialogVisible"
+    :append-to-body='true'
+    width="480px"
+    @close="close1"
+  )
+    el-form.form(:model="deleteForm" :rules="formRules" label-width="80px" size="small" ref="deleteForm")
+      el-form-item(prop="withdraw_password" label="提款密码")
+        withdraw-password(:resultForm="deleteForm" :resultKey="'withdraw_password'" :isReset="deletedialogVisible")
+      el-form-item
+        el-button.solid.red-btn-260(@click.stop.prevent="deleteBank") 确定
+  

@@ -1,0 +1,45 @@
+.ad-api
+  position fixed
+  top 0
+  z-index 2000
+
+  .swiper-container
+    max-width 320px
+
+  >>>
+    .swiper-pagination-bullet
+      background-color #DCDCDC
+      opacity 1
+
+      &:focus
+        outline none
+
+    .swiper-pagination-bullet-active
+      background-color #F4002B
+
+  .left-bottom
+    position fixed
+    left 0
+    bottom 0
+
+  .right-bottom
+    position fixed
+    right 0
+    bottom 0
+
+  span
+    position absolute
+    top 0
+    right 0
+    width 28px
+    height 28px
+    background url('./img/close.png') no-repeat center center
+    cursor pointer
+    z-index 2002
+
+// 适配全屏弹窗时滑动条消失导致位置偏移
+.dialog-css, .el-popup-parent--hidden
+  .home
+    .ad-api
+      .right-bottom
+        right 17px

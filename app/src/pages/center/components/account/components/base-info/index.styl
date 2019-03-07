@@ -1,0 +1,123 @@
+$red-color = #E6382F
+
+.base-info
+  overflow-y auto
+  height 628px
+
+  .cursor
+    cursor pointer
+
+  .el-icon-refresh
+    margin-left 10px
+    font-weight bold
+    cursor pointer
+    font-size 16px
+    padding 0
+    background transparent
+    border 0
+    color #909399
+
+    &.is-disabled
+      background-color transparent !important
+
+    &.red
+      color $red-color
+
+  p
+    margin 0
+
+  .section
+    margin 19px 17px 9px 10px
+
+    .title
+      font-size 14px
+      color #909399
+      position relative
+
+  .row
+    display flex
+    justify-content space-between
+    background-color #ffffff
+    height 48px
+    line-height 48px
+    padding 0 10px
+    color #1B1D26
+    font-size 12px
+
+    .left
+      display flex
+
+      p
+        margin-right 56px
+
+    span
+      font-size 16px
+
+      &.red
+        color $red-color
+
+  .child-wallet
+    min-height 100px
+    padding 0 10px
+    background-color #ffffff
+
+    .table
+      border 1px solid #ddd
+      margin 0
+      width 100%
+      color #666666
+      font-size 12px
+
+      tr
+        border 1px solid #ddd
+        height 40px
+        line-height 40px
+
+        &:first-child
+          background-color #F5F5F5
+          height 36px
+          line-height 36px
+
+          td
+            border-right 0
+
+        &:nth-of-type(2n+1)
+          background-color #F5F5F5
+
+        &:nth-of-type(2n)
+          background-color #fff
+
+        td
+          width 33%
+          border-right 1px solid #ddd
+
+          &:hover
+            background-color rgba(255, 228, 228, 1)
+
+          .title
+            margin-left 50px
+
+          .tip
+            color #999999
+
+          .name
+            width 150px
+            display inline-block
+            text-align right
+            margin-right 8px
+
+  .valid-table-wrap
+    min-height 100px
+    background-color #ffffff
+    padding-top 13px
+
+    .valid-table
+      display flex
+      margin 0 10px 0 10px
+
+      .table1
+        flex 1
+        margin-left -1px
+
+        &:first-child
+          margin-left 0

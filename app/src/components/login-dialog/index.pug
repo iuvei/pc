@@ -1,0 +1,66 @@
+.login
+  el-dialog.four-eight(
+    title="用户登录"
+    :visible="dialogLoginVisible"
+    width="450px"
+    @close="()=>updateLoginVisible(false)"
+    :close-on-click-modal="false"
+  )
+    el-tabs(@tab-click="tabToggle")
+      el-tab-pane(label="账户登录")
+        el-form(:model="form1" :rules="rules1" ref="form1" label-width="90px")
+          el-form-item(label="帐号:" prop="username")
+            el-input(
+              type="text" 
+              v-model="form1.username" 
+              placeholder="请输入用户名" 
+              @keyup.enter.native="onLoginClick"
+              clearable
+            )
+          el-form-item(label="登录密码:" prop="password")
+            el-input(
+              type="password" 
+              v-model="form1.password" 
+              placeholder="请输入密码" 
+              @keyup.enter.native="onLoginClick"
+              clearable
+            )
+      el-tab-pane(label="免密快捷登录")
+        el-form(:model="form2" :rules="rules2" ref="form2" label-width="90px")
+          el-form-item(label="手机/邮箱:" prop="mobile_email")
+            el-input(
+              type="text" 
+              v-model="form2.mobile_email" 
+              placeholder="请输入手机号/邮箱" 
+              @keyup.enter.native="onLoginClick"
+              clearable
+            )
+          el-form-item.vcode(label="验证码:" prop="vcode")
+            el-input.vcode-input(
+              type="text" 
+              v-model="form2.vcode" 
+              placeholder="请输入验证码" 
+              @keyup.enter.native="onLoginClick"
+              clearable
+            )
+            el-button.vcode-btn(
+              :disabled="disabledCodeBtn"
+              @click="getVcode"
+              :loading="getVcodeLoading"
+            ) {{btnText}}
+
+    el-button.login-btn.solid(
+      type="primary"
+      :loading="isLogining" 
+      @click="onLoginClick" 
+      @keyup.13="onLoginClick") 登 录
+      
+    .forget-register-freeplay
+      span.forget-psw(@click="gotoForgetPwd") 忘记密码
+      template(v-if="registerSwitch")
+        i |
+        span.register(@click="gotoRegister") 注册账号
+      i |
+      span.freeplay(@click="gotoFreePlay")  免费试玩
+
+    template(slot="footer" v-if="steamSwitch") steam账号登陆

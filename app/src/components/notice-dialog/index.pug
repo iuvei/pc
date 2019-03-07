@@ -1,0 +1,10 @@
+el-dialog.notice-dialog(title="平台公告" width="1000px" top="12vh" :visible="noticeDialogConfig.visible" @close="onClose" :close-on-click-modal="false")
+  .body-wrap
+    aside.menu-wrap
+      .item(v-for="item, index in list" :key="index" :class="{ active: index === activeIndex }" @click="onItemClick(index)")
+        span {{ item.title }}
+        i.el-icon-arrow-right
+    section.content-wrap
+      div(v-if="list.length > 0" v-html="list[activeIndex].content")
+  .chk-box(v-if="!token")
+    el-checkbox(v-model="checked", size="mini") 已查看，不再提示

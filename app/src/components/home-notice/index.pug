@@ -1,0 +1,9 @@
+.index-notice
+  .wrap
+    .date-wrap
+      span(v-show="timezone.value") {{timezone.name}}：{{dateLabel}} ({{timezone.utc}})
+    .trumpet(v-if="list.length > 0")
+    .title(v-if="list.length > 0") 最新消息：
+    .notice-wrap
+      marquee(ref="marquee" behavior="scroll" scrollamount="4")
+        span(v-for="item, index in list" :key="index" @click="onNoticeClick(item)" @mouseover="onMarqueeMouseOver" @mouseout="onMarqueeMouseOut") {{ item.content }}

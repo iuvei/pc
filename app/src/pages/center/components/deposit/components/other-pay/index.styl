@@ -1,0 +1,157 @@
+$red-color = #e6382f
+
+.container
+  .page
+    background-color #ffffff
+    padding 30px 0
+    padding-left 27px
+    margin-top 1px
+
+    &.first-child
+      margin-top 0
+      padding-left 16px
+
+    .sale-title
+      color #1B1D26
+      font-size 14px
+      margin-bottom 26px
+
+    .radio-wrap
+      line-height 25px
+
+    .sale-tip
+      margin-top 15px
+
+  .red
+    color #e6382f
+    margin-left 10px
+
+  .el-checkbox-group
+    margin 0
+
+  .el-form-item
+    margin-bottom 0
+
+    .el-input, .el-textarea
+      width 300px
+
+  .submit
+    width 180px
+    height 40px
+    background-color $red-color
+    border-radius 3px
+
+  .others
+    background-color #ffffff
+    margin-top 10px
+    padding 21px 19px 10px
+
+    p
+      margin-bottom 17px
+      color #909399
+      font-size 12px
+
+      &.title
+        color #666666
+
+.other-dialog
+  >>>
+    .el-dialog
+      .el-dialog__body
+        padding 10px 20px 30px
+
+  .recharge-qrcode-main
+    color #1B1D26
+    font-size 14px
+
+    .section
+      line-height 50px
+      font-size 14px
+
+      >>>
+        .el-button:hover
+          color $red-color
+          border-color $red-color
+          background-color #FFE4E4
+
+    .content-t
+      background-color #F6F6F6
+      width 100%
+      padding 15px 0
+      margin-top 13px
+
+      p
+        text-align center
+        padding-top 16px
+        font-weight bold
+
+      .code-wrap
+        width 155px
+        margin 0 auto
+        position relative
+
+        .code
+          text-align center
+          padding 7px
+          border 1px solid $red-color
+
+          >>>
+            canvas
+              width 142px !important
+              height 100% !important
+
+        img
+          position absolute
+
+          &.tl
+            top 0
+            left 0
+
+          &.tr
+            top 0
+            right 0
+            transform rotate(90deg)
+
+          &.bl
+            bottom 0
+            left 0
+            transform rotate(-90deg)
+
+          &.br
+            bottom 0
+            right 0
+            transform rotate(-180deg)
+
+    .red
+      color $red-color
+      padding 0 5px
+      font-weight bold
+
+    .copy
+      width 56px
+      height 28px
+      padding 0
+      border-radius 3px
+      margin-left 16px
+
+  .recharge-qrcode-button
+    text-align center
+
+    .btns
+      width 180px
+      height 40px
+      background $red-color
+      border-radius 3px
+      margin-top 15px
+
+  .recharge-qrcode-scan-steps
+    margin-top 12px
+
+    p
+      color #434343
+      line-height 25px
+      font-size 12px
+
+      &.title
+        font-size 14px
+        color #666666

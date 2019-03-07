@@ -1,0 +1,65 @@
+.center-exchange
+  .row
+    .left
+      p 总资产 : 
+        span.red ￥
+        span.red( class="jumbo" id="myTargetElement")
+      p 主钱包 : 
+        span.red ￥{{$fmoney(mainWallet,2)}}
+      p 提款冻结 : 
+        span.red ￥{{$fmoney(freezeWithdraw,2)}}
+    .right
+      el-button.recharge-btn(size="mini" @click.stop.prevent="updateCenterDialogConfig({ visible: true, group: 0, menu: 2, tab: 'recharge' })") 充值
+      el-button.withdraw-btn(size="mini" @click.stop.prevent="updateCenterDialogConfig({ visible: true, group: 0, menu: 2, tab: 'withdraw' })") 提款
+      el-button.oneCycle-btn.hollow(size="mini" @click.stop.prevent="oneRecycleFun" :disabled="btnAble") 一键回收
+      el-button.all-refrash-btn.hollow(size="mini" @click.stop.prevent="allRefreshFun" :disabled="btnAble") 全部刷新
+  
+  .row1
+    el-form.change-form(ref="form" :model="form" :rules="formRules" label-width="0px")
+      .exchange-in
+        p.title 转出
+        p.select
+          el-form-item(prop="transferWallet")
+            el-select(v-model="form.transferWallet" placeholder="请选择转出帐户" @change="transferWalletFun")
+              el-option(
+                v-for="obj,index in selectWalletArr"
+                :key="index"
+                :label="obj.name"
+                :value="index"
+              )
+      .exchange-in
+        p.title 转入
+        p.select
+          el-form-item(prop="transferToWallet")
+            el-select(v-model="form.transferToWallet" placeholder="请选择转入帐户" @change="transfeTorWalletFun")
+              el-option(
+                v-for="obj,index in selectWalletArr"
+                :key="index"
+                :label="obj.name"
+                :value="index"
+              )
+            
+      .exchange-in
+          p.title 填入金额
+          p.select
+            el-form-item(prop="amount")
+              el-input(v-model="form.amount" placeholder="请填入整数金额")
+      .exchange-in
+        p.title
+        el-button.confirm-btn.solid(size="mini" @click="confirmTransferWallet" :disabled="btnAble") 确定转账
+    .tip 注：转入或转出子钱包，支持整元的转账金额。
+    
+    .table-wrap(v-loading="loadingCWallet")
+      el-table.table1(v-for="child,index in childListArr" :data="child" border stripe :key="index")
+        el-table-column(prop="name" label="平台(子钱包)" width="180")
+          template(slot-scope="scope")
+            span {{scope.row.name.replace('子钱包','')}}
+        el-table-column(prop="balance" label="余额" width="180")
+          template(slot-scope="scope")
+            span.balance(v-if="scope.row.isShowValue") {{scope.row.balance==='获取失败'?scope.row.balance:'￥'+$fmoney(scope.row.balance,2)}} 
+            i.el-icon-loading(v-else) 
+            el-button.el-icon-refresh.cursor( @click="reflreshChildWallet(index?childListArr[0].length+scope.$index:scope.$index)" :disabled="isRefresh")          
+              
+        el-table-column(label="操作" width="180" :render-header="renderHeader")      
+          template(slot-scope="scope")
+            el-button.one-btn.hollow(@click="changeMoneyIntoChild(scope.row,index,scope.$index)" size="mini" :disabled="isRefresh") 转入   

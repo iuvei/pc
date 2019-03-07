@@ -1,0 +1,39 @@
+.home-header
+  .top-wrap
+    .left
+      .angle
+      .btns
+        el-button(v-if="isFree === 'true'&&!token" type="text" @click.stop.prevent="updateFreeDialogVisible(true)") 免费试玩
+        //- el-button(type="text") 备用网址
+        el-button(type="text" @click="onAPPDownloadClick") APP下载
+        el-button(type="text" @click.stop.prevent="goKefu") 在线客服 
+    .right(v-if="token.length === 0")
+      .password(@click="updateForgetDialogVisible(true)") 忘记密码?
+      el-button.register(v-if="registerSwitch" type="primary" round @click="()=>this.$router.push({ path: '/register' })") 免费开户
+      el-button.login(
+        type="primary" 
+        round 
+        :loading="loginLoading"
+        @click="onLoginClick") 登录
+      el-form(:inline="true" :model="loginForm" ref="loginForm")
+        el-form-item
+          el-input(v-model="loginForm.username" placeholder="用户名" @keyup.enter.native="onLoginClick('loginForm')")
+        el-form-item
+          el-input(v-model="loginForm.password" placeholder="密码" type="password" @keyup.enter.native="onLoginClick('loginForm')")
+    .right(v-else)
+      el-button.logout(round :loading="loginoutLoading" @click="onLogoutClick") 登出
+      .center-btns
+        ul
+          li(v-for="item, index in centerMenus" :key="index")
+            a(href="javascript:;" @click="onCenterMenuClick(item)") {{ item.title }}
+      .mail
+        img(src="./img/mail.svg" @click="onMessageClick")
+        span(v-if="messageNum > 0")
+      .balance-wrap
+        img(src="./img/balance.svg")
+        span {{$fmoney(totalBalance, 2)}}
+      .user-wrap
+        img(src="./img/user.svg")
+        span {{ username }}
+  home-menu
+  

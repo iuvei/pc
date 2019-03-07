@@ -1,0 +1,148 @@
+.game-common
+  background-repeat no-repeat
+  background-position center 130px
+  background-size 1920px auto
+
+  .game-menu
+    width 100%
+    height 50px
+    position relative
+    z-index 100
+
+    .warp
+      width 1200px
+      height 100%
+      margin 0 auto
+
+      .menu-list
+        display flex
+        flex-wrap nowrap
+        align-items center
+        padding 0 18px
+        height 50px
+
+        .list-item
+          position relative
+          height 50px
+          font-size 16px
+
+          span
+            display inline-block
+            padding 7px
+            min-width 40px
+            max-width 120px
+            text-align center
+            border-radius 15px
+            margin-right 30px
+            white-space nowrap
+            text-overflow ellipsis
+            overflow hidden
+            cursor pointer
+            margin-top 10px
+
+            &.active
+              background-color #ffffff
+
+          &:hover
+            span
+              background-color #ffffff
+
+            .secondmenu
+              display block
+
+          .secondmenu
+            width 100%
+            position absolute
+            top 50px
+            padding-bottom 10px
+            left -15px
+            display none
+            background-color #ffffff
+
+            li
+              text-align center
+              cursor pointer
+              font-size 14px
+              line-height 30px
+              white-space nowrap
+              text-overflow ellipsis
+              position relative
+
+              .thirdmenu
+                width 100%
+                position absolute
+                right -100%
+                top 0
+                display none
+                padding-bottom 10px
+                background-color #ffffff
+
+              &:hover
+                .thirdmenu
+                  display block
+
+  .api-ad
+    width 1120px
+    height 230px
+    padding 17px 40px
+    margin 0 auto
+    background-color #F4F5FA
+
+    img
+      width 1120px
+      height 230px
+
+    .swiper-container
+      max-width 1120px
+
+    .swiper-pagination-ad
+      bottom 20px
+      text-align center
+
+    >>>
+      .swiper-pagination-bullet
+        width 20px
+        height 4px
+        border-radius 0
+        background-color #DCDCDC
+        opacity 1
+
+        &:focus
+          outline none
+
+      .swiper-pagination-bullet-active
+        background-color #F4002B
+
+  .recommends
+    width 1120px
+    margin 0 auto
+    padding 18px 40px 38px
+    background-color #F4F5FA
+
+    .title
+      font-size 16px
+      display flex
+      justify-content space-between
+      margin-bottom 18px
+
+      .text
+        height 30px
+        line-height 30px
+        text-align center
+        padding 0px 9px
+        color #ffffff
+        border-radius 3px 3px 0px 0px
+
+      .more
+        padding-top 5px
+        cursor pointer
+
+  .bottom
+    width 1200px
+    height 20px
+    position absolute
+
+    &.isPage
+      width 100%
+      position fixed
+      bottom 0

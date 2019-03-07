@@ -1,0 +1,35 @@
+div
+  .recommend(v-if="type === 'swiper'")
+    div(v-if="list.length > 0")
+      swiper(:options="swiperOption" ref="swiper")
+        swiper-slide(v-for="item, index in list" :key="index")
+          .item
+            .img-wrap
+              img(:src="item.img_url")
+            .text {{item.game_name}}
+            .collection(:class="{favorite: item.is_favorite}" @click="changeFavoriteStatus(item,index)")
+            .shadow
+              span(:class="{ demo: !item.support_demo || userType === '1' }" @click="onPlayClick(item)") 进入游戏
+              span.try(v-if="item.support_demo && userType != '1'" @click="onTryClick(item)") 试玩游戏
+      .swiper-pagination-recommend(slot="pagination")
+      .btn.button-prev(@click="btnClick(1)")
+      .btn.button-next(@click="btnClick(2)")
+    .notfound(v-else)
+      img(src="./img/notfound.png")
+      span 暂无数据
+  div.game-list1(v-if="!type")
+    .list(v-if="list.length > 0")
+      .item(v-for="item, index in list" :key="index")
+        .img-wrap
+          img(:src="item.img_url")
+        .text {{item.game_name}}
+        .collection(:class="{favorite: item.is_favorite}" @click="changeFavoriteStatus(item,index)")
+        .shadow
+          span(:class="{ demo: !item.support_demo || userType === '1' }" @click="onPlayClick(item)") 进入游戏
+          span.try(v-if="item.support_demo && userType != '1'" @click="onTryClick(item)") 试玩游戏
+    el-pagination(v-if="list.length > 0" @size-change="onPageSizeChange" @current-change="onCurrentChange" :current-page="page" :page-size="size" layout="prev,pager,next" :total="total" background)
+    .notfound(v-else)
+      img(src="./img/notfound.png")
+      span 暂无数据
+
+  

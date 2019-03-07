@@ -1,0 +1,52 @@
+.index-notice
+  background-color #000
+  position absolute
+  top 116px
+  z-index 998
+  height 30px
+  width 100%
+
+  .wrap
+    width 1200px
+    height 100%
+    margin auto
+    display flex
+    align-items center
+
+    .date-wrap
+      width 300px
+      color #fff
+      font-size 12px
+      font-weight 500
+
+    .trumpet
+      background url('./img/trumpet.svg') no-repeat center
+      width 16px
+      height 13px
+      margin-right 6px
+      margin-bottom 1px
+
+    .title
+      width 78px
+      font-size 14px
+      color #FCFF04
+
+    .notice-wrap
+      width 800px
+      white-space nowrap
+      overflow hidden
+
+      marquee
+        height 30px
+        line-height 32px
+        font-size 14px
+        color #FEFEFE
+
+        span
+          cursor pointer
+
+          &+span
+            margin-left 10px
+
+          &:hover
+            text-decoration underline

@@ -1,0 +1,206 @@
+$red-color = #e6382f
+
+.company-container
+  position relative
+
+  .con
+    width 2266px
+    transition transform 0.2s
+    display flex
+    position absolute
+    left 0
+
+    .first-page, .second-page
+      flex 1
+
+    .first-page
+      .recharge
+        span
+          color #1B1D26
+          font-size 14px
+
+          &.red
+            margin-left 20px
+            color $red-color
+            font-size 12px
+
+            &.big
+              font-size 20px
+              margin-left 0
+
+    .second-page
+      .sec
+        background-color #fff
+        padding-left 30px
+
+        .content
+          width 740px
+          height 302px
+          border 1px solid #DDDDDD
+          position relative
+
+          .copy
+            width 56px
+            height 28px
+            padding 0
+            border-radius 3px
+            margin-left 16px
+
+          .qrcode
+            position absolute
+            width 188px
+            height 208px
+            background-color #F5F5F5
+            right 41px
+            top 64px
+            text-align center
+
+            .top
+              color #434343
+              font-size 14px
+              line-height 50px
+
+            .img-wrap
+              width 133px
+              position relative
+              margin 0 auto
+              padding 7px
+              border 1px solid #e6382f
+
+              .img
+                width 133px
+
+              .line
+                position absolute
+
+                &.tl
+                  top 0
+                  left 0
+
+                &.tr
+                  top 0
+                  right 0
+                  transform rotate(90deg)
+
+                &.bl
+                  bottom 0
+                  left 0
+                  transform rotate(-90deg)
+
+                &.br
+                  bottom 0
+                  right 0
+                  transform rotate(-180deg)
+
+          .top-title
+            background #F5F5F5
+            height 36px
+            line-height 36px
+            font-size 14px
+            color #1B1D26
+            font-weight bold
+            padding-left 22px
+            border-bottom 1px solid #DDDDDD
+
+          >>>
+            .el-form
+              margin-top 27px
+
+        .btns
+          margin-top 23px
+          padding-bottom 40px
+
+          >>>
+            .el-button
+              font-size 14px
+              height 40px
+
+            .cancel
+              width 90px
+              background-color #B5B5B5
+
+            .confirm
+              width 180px
+              background-color $red-color
+
+      .recharge
+        display flex
+        line-height 20px
+        padding-top 28px
+        padding-bottom 21px
+
+        span
+          color #1B1D26
+          font-size 14px
+
+          &.red
+            margin-left 20px
+            color $red-color
+            font-size 12px
+
+            &.big
+              font-size 20px
+              margin-left 10px
+              font-weight bold
+
+      >>>
+        .el-input.is-disabled .el-input__inner
+          border-color #D3D4D6 !important
+          background-color #F5F5F5 !important
+          color #666666 !important
+          font-size 14px !important
+
+  .banklist
+    .el-radio
+      width 130px
+      height 38px
+      background-position center center
+      background-repeat no-repeat
+      background-size auto auto
+      line-height 40px
+
+      >>>
+        .el-radio__label, .el-radio__inner
+          display none
+
+  .form
+    padding 30px 0
+
+    .custom
+      margin-top -10px
+      margin-bottom 10px
+
+  .el-form
+    background-color #fff
+
+    span
+      color #000000
+      font-size 14px
+
+      &.red
+        margin-left 20px
+        color $red-color
+        font-size 12px
+
+        &.big
+          font-size 20px
+          margin-left 10px
+
+  .others
+    background-color #ffffff
+    margin-top 10px
+    padding 21px 19px 10px
+
+    p
+      margin-bottom 12px
+      color #909399
+      font-size 12px
+
+      &.title
+        color #666666
+
+  .submit
+    width 120px
+    height 40px
+    background-color $red-color
+    margin-top 10px

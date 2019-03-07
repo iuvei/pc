@@ -1,0 +1,11 @@
+.withdraw-password
+  el-select.select(v-for="i in 4" :key="i" v-model="valuesArr[i-1]"  @change="changePsd") 
+    el-option(
+      v-for="obj,i in options"
+      :key="i"
+      :label="obj.label"
+      :value="obj.value"
+    )
+
+
+  

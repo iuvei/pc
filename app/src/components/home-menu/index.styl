@@ -1,0 +1,123 @@
+.home-menu
+  height 60px
+  background-color #f4f5fa
+
+  .wrap
+    width 1200px
+    height 100%
+    margin auto
+    display flex
+    justify-content space-between
+    align-items flex-end
+
+    .logo
+      width 200px
+      padding-bottom 10px
+
+      a
+        display flex
+
+        img
+          height 35px
+
+        img+img
+          margin-left 6px
+
+    .menu
+      font-size 16px
+      font-weight 800
+      color #1B1D26
+      display flex
+      align-items flex-end
+
+      label
+        cursor pointer
+        position relative
+        padding-bottom 15px
+
+        &:hover
+          color #F4002B !important
+
+          .drop-wrap
+            display block
+
+        .hot
+          content ''
+          position absolute
+          top -18px
+          right -18px
+          display inline-block
+          width 23px
+          height 15px
+          background url('./img/hot.gif') no-repeat center
+
+        .drop-wrap
+          position absolute
+          left -35px
+          top 29px
+          min-width 140px
+          box-shadow 0px 4px 8px 0px rgba(25, 28, 33, 0.5)
+          display none
+          z-index 1000
+
+          .activity
+            width 100%
+            height 34px
+            line-height 35px
+            background-color #EE071F
+            text-align center
+            font-size 14px
+            font-weight 500
+            color #fff
+            cursor default
+
+          .submeun-wrap
+            display flex
+
+            .submenu
+              width 140px
+              background-color #F4F5FA
+              color #434343
+              text-align center
+              font-weight bold
+              font-size 14px
+              position relative
+              padding 10px 0
+
+              &+.submenu
+                &::before
+                  content ''
+                  position absolute
+                  width 1px
+                  left 0
+                  top 10px
+                  bottom 10px
+                  background-color #DDDDDD
+
+              .subitem
+                height 34px
+                line-height 34px
+
+                &:hover
+                  color #EE071F
+                  animation anim-subitem 5s ease-in-out
+                  font-size 15px
+
+                @keyframes anim-subitem
+                  0%
+                    -webkit-transform translateZ(0)
+                    -moz-transform translateZ(0)
+                    transform translateZ(0)
+
+                  1%, 8%
+                    -webkit-transform translate3d(0, -2px, 0)
+                    -moz-transform translate3d(0, -2px, 0)
+                    transform translate3d(0, -2px, 0)
+
+                  4%, 11%, 100%
+                    -webkit-transform translateZ(0)
+                    -moz-transform translateZ(0)
+                    transform translateZ(0)
+
+      label+label
+        margin-left 20px

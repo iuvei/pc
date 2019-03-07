@@ -1,0 +1,7 @@
+.index-footer
+  .logo
+  .wrapper
+    ul
+      li(v-for="item,index in dataSource" :key="index" @click.stop.prevent="$router.push({path:'help-center',query:{index}})") 
+        a {{item.name}}
+    .copyright Copyright © {{bottom}} 2019 Reserved.

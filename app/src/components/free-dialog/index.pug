@@ -1,0 +1,17 @@
+
+  
+//- 免费弹框
+el-dialog.four-eight(
+  ref="dialogForm"
+  :title="formColumn.title"
+  :visible="freeDialogVisible"
+  :append-to-body='true'
+  width="480px"
+  @close="closeDialog"
+)
+  edit-form(ref="editForm" :formColumn="formColumn" :form="dialogForm" :formRules="formRules" )
+    template(v-if="formColumn.title==='试玩账号注册'")
+      p.title 说明:
+      p.con-title 1.试玩账号不可存款和取款，以及参与平台优惠活动；
+      p.con-title 2.您可使用试玩账号再次登录平台，入口与正式账号相同；
+      p.con-title 3.试玩账号自注册起，有效期为72小时，超过时间系统将自动收回。

@@ -1,0 +1,7 @@
+.notice
+  .table
+    el-table(:data="tableData" border style="width: 100%" v-loading="isLoading")
+      el-table-column(v-for="item, index in tableHead" :key="index" :label="item.label" :prop="item.prop" :width="item.width" :min-width="item.minWidth" :formatter="item.formatter" :render-header="item.renderHeader")
+        template(slot-scope="scope")
+          div(v-html="scope.row[item.prop]")
+    el-pagination(@size-change="onPageSizeChange" @current-change="onCurrentChange" :current-page="page" :page-sizes="sizes" :page-size="size" layout="total, sizes, prev, pager, next, jumper" :total="total" background)

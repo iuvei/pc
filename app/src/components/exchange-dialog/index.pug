@@ -1,0 +1,36 @@
+//- 额度快速转换的弹框
+el-dialog.center-exchange-dialog(
+      :visible="exchangeDialogConfig.visible" 
+      :append-to-body='true'
+      title="额度转换"
+      @close="close"
+      width="440px"
+      :close-on-click-modal="false"
+      
+    ) 
+      div(v-loading="isLoading")
+        .d-top
+          .t-l
+            img(src="./img/host.svg")
+            p.title 主钱包
+            p.red ￥{{mainWallet}}
+            el-button.hollow.all-restore(@click.stop.prevent="oneRecycle" :disabled="btnAble") 一键回收
+          .t
+            img(src="./img/arrow.svg")
+          .t-l
+            img(src="./img/child.svg")          
+            p.title {{ exchangeDialogConfig.childName }}
+            p.red {{ exchangeDialogConfig.childBalance === '获取失败' ? '获取失败' : '￥' + exchangeDialogConfig.childBalance }}
+        el-form.form(ref="dialogForm" :model="dialogForm" :rules="formRules" label-width="0px")
+          .select-wrap
+            .select
+              el-form-item(prop="amount")
+                el-input(v-model="dialogForm.amount" placeholder="请填入转入整数金额")
+              .num-wrap
+                .num.hollow(v-for="i,index in moneyArr" :key="index" @click.stop.prevent="selectMoney(i)") {{i==='全部'?'全部':'￥'+i}}
+            .btns
+              el-button.solid.submit(@click.stop.prevent="submitForm" size="mini" :disabled="btnAble") 确认转换
+              el-button.go(v-if="exchangeDialogConfig.apiParams" size="mini" @click.stop.prevent="gotoAPI" type="text" ) 进入游戏
+                img(src="./img/link.svg")
+          
+          .tip 注：转入或转出子钱包，只支持整元的转账金额。

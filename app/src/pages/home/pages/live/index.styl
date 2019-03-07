@@ -1,0 +1,201 @@
+.live
+  background url('./img/bg.png') no-repeat top center
+
+  .wrap
+    width 1200px
+    margin auto
+    padding 50px 0 30px 0
+
+    .large-wrap
+      display flex
+      justify-content space-between
+
+      .large
+        width 896px
+        height 395px
+        box-shadow 0px 0px 8px rgba(0, 0, 0, 0.5)
+        position relative
+        cursor pointer
+
+        .mask
+          width 100%
+          height 100%
+          position absolute
+          background-color #797AEB
+          opacity 0
+          transition opacity 0.4s ease
+
+          &:hover
+            opacity 0.96
+
+          .head-wrap
+            position relative
+            top 40px
+            left 20px
+            display flex
+            align-items center
+
+            .logo
+              height 42px
+
+            .desc
+              font-size 16px
+              font-weight bold
+              color #fff
+              letter-spacing 1px
+              opacity 0.9
+              margin-left 20px
+
+          .btn
+            width 100px
+            height 36px
+            line-height 35px
+            background-color #fff
+            border-radius 18px
+            font-size 16px
+            text-align center
+            position absolute
+            top 340px
+            left 780px
+            font-weight bold
+            letter-spacing 2px
+            text-indent 4px
+            color #797AEB
+
+          .box-wrap
+            width 380px
+            height 220px
+            margin 40px auto 0px auto
+            display flex
+            flex-wrap wrap
+            align-items center
+
+            .box
+              width 100px
+              height 100px
+              border 1px solid rgba(255, 255, 255, 0.6)
+              margin 20px 10px 0 10px
+              text-align center
+
+              &:hover
+                background-color #FFFFFF
+
+                .icon
+                  background url('./img/card-2.png') no-repeat center center
+
+                .title
+                  color #585858
+
+              .icon
+                background url('./img/card-1.png') no-repeat center center
+                width 48px
+                height 48px
+                margin 10px auto
+
+              .title
+                font-size 14px
+                font-weight bold
+                color #F4F5FA
+
+      .el-carousel
+        width 290px
+        overflow hidden
+
+        >>>
+          .el-carousel__indicators
+            background-color rgba(0, 0, 0, 0.2)
+            padding 0 10px
+            border-radius 14px
+            bottom 10px
+
+          .el-carousel__button
+            width 12px
+            height 4px
+
+    .small-wrap
+      height 348px
+      display flex
+      margin-top 20px
+
+      .box
+        position relative
+        width 288px
+        height 346px
+        cursor pointer
+
+        &:hover
+          .border
+            opacity 1
+
+        &+.box
+          margin-left 16px
+
+        &.pending
+          box-shadow none
+          cursor default
+
+        .border
+          position absolute
+          opacity 0
+          transition opacity 0.2s ease
+          width 100%
+          height 100%
+          border 4px solid #FFDE01
+          box-sizing border-box
+          -moz-box-sizing border-box
+          -webkit-box-sizing border-box
+
+        img
+          width 288px
+
+        .desc
+          width 280px
+          height 28px
+          line-height 14px
+          padding-left 18px
+          position absolute
+          font-size 14px
+          letter-spacing 1px
+          color #fff
+          left 0
+          bottom 10px
+          font-weight bold
+          opacity 0.9
+
+        .mask
+          width 100%
+          height 100%
+          position absolute
+
+          .btn
+            width 100px
+            height 36px
+            line-height 35px
+            background #fff
+            border-radius 18px
+            font-size 16px
+            text-align center
+            position relative
+            top 260px
+            left 170px
+            font-weight bold
+            letter-spacing 2px
+            text-indent 4px
+
+            &.lebo
+              color #F67035
+
+            &.bg
+              color #00D6D6
+
+            &.og
+              color #F7A400
+
+            &.ebet
+              color #98349E
+
+            &.ag
+              color #6265DE
+
+            &.bbin
+              color #f33834

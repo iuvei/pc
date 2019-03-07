@@ -1,0 +1,36 @@
+.center-security
+  .container(v-loading="loading")
+    .level
+      .level-wrap
+        span 安全级别:
+        p(v-for="i in levelArr" :key="i" :style="{'background-color':levelArr.length == 1?'#FF504E':levelArr.length == 3?'#66CB3C':'#FFAB19'}")
+        span.prompt {{levelArr.length == 1?'低':levelArr.length == 3 ?'高':'中'}}
+      span 建议您启动全部安全设置
+
+    .section(v-for="sec,index in dataSource" :key="index")
+      .top
+        .title {{sec.title}}
+        .p-title {{sec.pTitle}}
+
+      .content(v-for="con,i in sec.data" :key="i")
+        .img
+          img(:src="require(`./img/${con.key}.svg`)")
+        .text
+          p.label {{dataSourceLabel[con.key]}}
+          p.value {{con.arr.value}}
+            template(v-if="con.arr.status==1&&dataSourceLabel[con.key]==='提现密码'")
+              span.forget-widthdraw 忘记提现密码?请点击
+              span.cursor(@click.stop.prevent="updateWithdrawDialogVisible(true)") 这里
+        el-button(@click.stop.prevent="onClickCell(con)" size="mini" :class="{'start solid':con.arr.status==0,'edit hollow':con.arr.status==1}") {{con.arr.status==0?status0:sec.title==='实名认证'?'查看':status1}}
+        .line(v-if="sec.data.length>1&&i!==sec.data.length-1")
+
+  //- 弹框
+  el-dialog.four-eight(
+    ref="dialog"
+    :title="formColumn.title"
+    :visible.sync="dialogVisible"
+    :append-to-body='true'
+    width="480px"
+    @close="cancel"
+  )
+    edit-form(:dialogVisible="dialogVisible" :formColumn="formColumn" :form="form" :formRules="formRules" @tabClick="tabClick" :tabName="tabName" :loading="loadingDialog")

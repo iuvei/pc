@@ -1,0 +1,205 @@
+.agent-container
+  position relative
+
+  .basic-info
+    display flex
+    line-height 50px
+    border-bottom 1px solid #F5F5F5
+    background-color #fff
+    padding 0 30px
+
+    .label
+      color #1B1D26
+      font-size 14px
+      width 100px
+      text-align right
+
+    .value
+      text-indent 0.5em
+
+      span
+        color #e6382f
+        font-size 14px
+
+        &.failed
+          display inline-block
+          text-align center
+          width 66px
+          height 28px
+          line-height 28px
+          background rgba(181, 181, 181, 1)
+          border-radius 3px
+          color #fff
+          text-indent 0
+          margin-left 30px
+
+  .title
+    font-size 14px
+    line-height 24px
+    color #909399
+    position relative
+    text-indent 1em
+    margin-bottom 10px
+
+  .row
+    display flex
+    justify-content space-between
+    background-color #f5f3ff
+    margin 10px auto
+    padding 0 20px
+    margin-bottom 20px
+
+    .content
+      p
+        height 40px
+        line-height 40px
+
+      & > div
+        padding-bottom 10px
+
+    p
+      margin-right 50px
+      color #3f3e63
+
+  .without-binding
+    .flow-process
+      display flex
+      justify-content space-around
+      background-color #fff
+      padding-top 30px
+      padding-bottom 20px
+
+      .pic-wrapper
+        text-align center
+
+        p
+          color #504B4C
+          font-size 16px
+          line-height 42px
+          font-family '微软雅黑'
+
+    .arrow
+      background-image url('./img/arrow-l.png')
+      background-repeat no-repeat
+      background-size contain
+      background-position-y 100px
+      width 126px
+
+    .right
+      .btn
+        color #999999
+        font-size 14px
+
+        &:hover
+          color #e6382f
+
+  .with-binding
+    background-color #fff
+
+    .label
+      color #1B1D26
+      font-size 14px
+      width 100px
+      text-align right
+      height 50px
+      line-height 50px
+      padding 0 30px
+
+    .links
+      padding 0px 30px 20px
+      border-bottom 1px solid #F5F5F5
+
+      .save
+        display inline-block
+        padding 0 23px
+        height 28px
+        line-height 28px
+        color #1B1D26
+        font-size 12px
+        border 1px solid rgba(211, 212, 214, 1)
+        background-color #fff
+        box-sizing border-box
+        cursor pointer
+        transition-duration 0.15s
+        border-radius 3px
+
+        &:hover
+          color #e6382f
+          background-color #FFE4E4
+          border-color #e6382f
+
+      >>>
+        .el-table.el-table--border
+          .el-table__row
+            td
+              border-bottom none
+
+  .buttons
+    display flex
+    justify-content space-between
+    background-color #fff
+    padding 20px 83px 40px 20px
+
+    .solid
+      width 180px
+      border-radius 3px
+      height 40px
+      background-color #e6382f
+
+    .hollow
+      width 279px
+      border-radius 3px
+
+  .status-buttons
+    text-align center
+
+    // 审核中, 重新申请
+    .on-progress, .denied
+      padding-top 120px
+
+    // 审核中
+    .on-progress
+      span
+        display inline-block
+        background-color #eeb967
+        font-size 14px
+        color #fff
+        width 66px
+        height 28px
+        line-height 28px
+        border-radius 3px
+        margin-bottom 24px
+
+      p
+        color #666
+        font-size 14px
+
+  .awaiting-register
+    position absolute
+    top 50%
+    left 50%
+    margin-left -150px
+    box-shadow 0 0 10px 1px rgba(0, 0, 0, 0.2)
+
+    .register-buttons
+      background-color #fff
+      width 320px
+      height 90px
+      padding 20px 40px
+      box-sizing border-box
+
+>>>
+  .btns-wrap
+    width 100px
+    height 40px
+    line-height 40px
+    padding 0
+    border-radius 3px
+    font-size 14px
+
+    &.confirm
+      background-color #e6382f
+
+    &.cancel
+      background-color #b5b5b5
+      margin-left 0

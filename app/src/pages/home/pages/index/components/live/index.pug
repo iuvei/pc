@@ -1,0 +1,23 @@
+.live-wrap(v-if="isVisible")
+  .bg-text
+  .title
+    .name 真人视讯
+      .sub LIVE CASINO
+  swiper(v-if="list.length >= 4" ref="swiper" :options="swiperOption")
+    swiper-slide(v-for="item, index in list" :key="index")
+      .desc {{ item.remark }}
+      .border
+      .mask
+        .btn(:class="getAPIName(item)") 进入游戏
+      img(:src="getImagePath(item)")
+    .swiper-pagination(slot="pagination")
+  .table-container(v-else)
+    .item(v-for="item, index in list" :key="index" @click="onEnterClick(item)")
+      .desc {{ item.remark }}
+      .border
+      .mask
+        .btn(:class="getAPIName(item)") 进入游戏
+      img(:src="getImagePath(item)")
+    template(v-if="list.length > 0 && list.length < 4")
+      .item.pending(v-for="i in 4 - list.length")
+        img(src="./img/pending.png")

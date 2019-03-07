@@ -1,0 +1,72 @@
+.base-info
+  .row
+    .left
+      p 用户名:
+        span  {{user.username}}
+      p 真实名:
+        span  {{user.realname}}
+    .right
+      p 最近登录:
+        span  {{user.last_login_time}}
+  
+  .section
+    span.title 我的钱包
+    el-button.red.el-icon-refresh(@click.stop.prevent="allRefreshFun" :disabled="btnAble")
+  
+
+  .row
+    .left
+      p 总资产 : 
+        span.red ￥
+        span.red( id="myTargetElement")  
+      p 主钱包 : 
+        span.red ￥{{$fmoney(mainWallet,2)}}
+      p 提款冻结 : 
+        span.red ￥{{$fmoney(freezeWithdraw,2)}}
+      div 
+        el-button.recharge-btn(size="mini" @click.stop.prevent="updateCenterDialogConfig({ visible: true, group: 0, menu: 2, tab: 'recharge' })") 充值
+        el-button.withdraw-btn(size="mini" @click.stop.prevent="updateCenterDialogConfig({ visible: true, group: 0, menu: 2, tab: 'withdraw' })") 提款
+        el-button.oneCycle-btn.hollow(size="mini" @click.stop.prevent="oneRecycleFun" :disabled="btnAble" ) 一键回收
+      //- el-button(size="mini") 全部刷新
+  .child-wallet(v-loading="loadingCWallet")
+    table.table(border="1")
+      tr(rowspan="3")
+        td 
+          span.title 子钱包
+            span.tip (转入或转出子钱包，只支持整元的转账金额)
+        td
+        td
+      tr(v-for="childArr,index in childListArr" :key="index")
+        td(v-for="item,i in childArr" :key="i")
+          span.name {{item.name.replace('子钱包','')}} : 
+          i.el-icon-loading(v-show="!item.isShowValue")
+          span(v-show="item.isShowValue") {{item.balance==='获取失败'?item.balance:'￥'+$fmoney(item.balance,2)}}  
+          el-button.el-icon-refresh.cursor( @click="reflreshChildWallet(index*3+i)" :disabled="btnAble")          
+        td(v-if="childArr.length<3" v-for="i in 3-childArr.length")
+    .row
+      .left
+      .right
+        p 子钱包总余额 :
+          span.red ￥
+          span.red(id="myTargetElement1")      
+
+  .section
+    .title 有效投注
+
+  .valid-table-wrap(v-loading="loadingBetting")
+    .valid-table
+      el-table.table1(
+        v-for="arr,index in validBetArr"
+        :key="index"
+        :data="arr"
+        border
+        stripe
+      )
+        el-table-column(prop="partner_name" label="平台" width="145")
+        el-table-column(prop="bet_amount" label="有效投注" )
+    .row 
+      p 本月累计有效投注：
+        span.red {{all_betting}}
+
+
+  

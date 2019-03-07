@@ -1,0 +1,47 @@
+.index-footer
+  position relative
+  background-color #272a2a
+  width 100%
+  height 180px
+  z-index 99
+
+  .logo
+    padding-top 40px
+    height 60px
+    background url('./img/logos.png') no-repeat center
+
+  .wrapper
+    position relative
+    margin 0 auto
+
+    ul
+      display block
+      text-align center
+
+      li+li:before
+        content '|'
+        padding 0 10px
+        color #747675
+        font-size 16px
+
+      li
+        display inline-block
+        vertical-align top
+
+        a
+          color #747675
+          font-size 16px
+          text-align center
+          text-decoration none
+          background transparent
+          cursor pointer
+
+          &:hover
+            color #fdfdc5
+
+    .copyright
+      margin-top 10px
+      color #747675
+      font-size 14px
+      line-height 30px
+      text-align center

@@ -1,0 +1,11 @@
+.recommend_bg
+  .recommend-header
+    .top
+      .logo
+        span 推荐游戏
+        span 这个平台最火、耐玩度最高的游戏！
+      .gamesearch
+        input.input(v-model="gamename" :placeholder="placeholder")
+        i.search(@click="doSearch")
+  recommend(:gamename="gamename" ref="recommend")
+  .bottom1

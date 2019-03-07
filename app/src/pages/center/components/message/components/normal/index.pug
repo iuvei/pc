@@ -1,0 +1,11 @@
+.normal
+  .operate.filter
+    el-button(type="danger" icon="el-icon-delete" size="small" :disabled="!isSelected" @click="clickDelete") 删除
+    el-button(type="primary" icon="el-icon-check" size="small" :disabled="!isSelected" @click="clickRead") 已读
+  .table
+    el-table(:data="tableData" border style="width: 100%" v-loading="isLoading" @selection-change="onSelectionChange")
+      el-table-column(type="selection" width="60")
+      el-table-column(v-for="item, index in tableHead" :key="index" :label="item.label" :prop="item.prop" :width="item.width" :min-width="item.minWidth" :formatter="item.formatter" :render-header="item.renderHeader")
+      el-table-column(label="操作" width="200")
+        template(slot-scope="scope")
+          el-button.btn(type="text" size="small" @click="clickDetail(scope.row)") 查看

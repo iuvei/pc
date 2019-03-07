@@ -1,0 +1,11 @@
+.home
+  template(v-if="subscriptionAllRight")
+    home-header
+    home-notice
+    router-view
+    home-footer
+    center(v-if="token.length")
+    ad-float
+    ad-api
+    side-bar
+    notice-dialog

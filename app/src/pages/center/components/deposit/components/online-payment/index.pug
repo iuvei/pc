@@ -1,0 +1,74 @@
+.online-payment
+  
+  el-form(:model="formAdd" :rules="rules" ref="form" label-width="120px")
+    .page
+      el-form-item(label="充值金额:" prop="money")
+        el-input(v-model="formAdd.money" type="number" min="0" max="999999999" @input="inputMoneyFun" :placeholder="`输入范围${sceneItem.once_min_limit}~${sceneItem.once_max_limit}`")
+        span(style="margin-left:9px")  元
+        span.red （{{sceneItem.once_min_limit}}元-{{sceneItem.once_max_limit}}元充值成功率最高）
+      el-form-item(label="选择支付通道:" prop="scene" :style="{height:'auto'}")
+        el-radio-group.banklist(v-model="formAdd.scene" @change="onPaymentChange")
+          el-radio(v-for="item,index in data.list" :key="item.scene" :label="item.scene" border :style="{backgroundImage: `url(${item.logo})`}") {{item.name}}
+      el-form-item(:style="{height:'auto'}")
+        el-radio-group.channels(v-model="formAdd.scene_id" @change="onChannelChange")
+          div(v-for="item,index in data.list[dataListIndex].scene_list" :key="item.id")
+            el-radio.radio-btn(:label="item.id" border v-model="formAdd.scene_id")
+              .logo(:style="{backgroundImage: `url(${item.logo})`}")
+              .name {{`通道${index+1}`}}
+              .remark {{`（${item.remark}）`}}
+    .page(v-if="data.list[dataListIndex].type==4")
+        el-form-item(label="银行卡:" prop="bank_code")
+          el-select(v-model="formAdd.bank_code" placeholder="请选择")
+            el-option( v-for="item in data.list[dataListIndex].bank_list" :key="item.code" :label="item.name" :value="item.code")
+  .page
+    p.sale-title 以下充值优惠活动可选择是否参加
+    el-radio-group(v-model="formAdd.active_id")
+      div.radio-wrap(v-for="item,index in data.active")
+        el-radio( :label="item.id" :key="index") {{item.title}}
+        p.sale-tip(v-if="item.id!=0") 
+          span 可获得优惠
+          span.red ￥{{$fmoney(reapProfit,2)}}
+  .page
+    el-button.submit.solid(@click="submitForm" :disabled="isSubmit") 提交
+    //-用来给网银的提交后，跳转到其他页面用的
+    button(ref="customerClick" style="display:none")
+    .others(v-if="data.list[this.dataListIndex]['remark']")
+      p.title 温馨提示：
+      p(v-html="data.list[this.dataListIndex]['remark']")
+  el-dialog.other-dialog(
+    :visible.sync="showDialog"
+    :append-to-body='true'
+    width="400px"
+    @close="cancel"
+    title="扫码支付"
+  ) 
+    
+    .recharge-qrcode-main
+      p.section
+        span 交易编号：
+        span {{qrcodeInfo.orderNum}}
+        el-button.copy(@click="copyBankInfo(qrcodeInfo.orderNum)" size="small") 复制
+      p
+        span 充值金额：
+        span.red ￥{{$fmoney(qrcodeInfo.money,2)}}
+        span(style="margin-left:10px") 获得优惠
+        span.red ￥{{$fmoney(qrcodeInfo.reapProfit,2)}}
+      .content-t
+        .code-wrap
+          qrcode-vue.code(:value="qrcodeInfo.url")
+          img.tl(src="./../../recharge/img/qrcode-border.svg")
+          img.tr(src="./../../recharge/img/qrcode-border.svg")
+          img.bl(src="./../../recharge/img/qrcode-border.svg")
+          img.br(src="./../../recharge/img/qrcode-border.svg")
+      .recharge-qrcode-button
+        el-button.btns.solid(@click="paySuccess") 我已支付
+      .recharge-qrcode-scan-steps
+        p.title 扫码步骤:
+        p 1.请在对应的应用中打开“扫一扫”，点击右上角的相册;
+        p 2.选择截屏二维码进行充值（如无法充值，请使用另一台手机扫码，或把二维码传到电脑，再使用手机扫码充值）;
+        p 3.如资金未及时到账，请联系
+          span.red(@click.stop.prevent="goKefu") 在线客服。
+
+
+
+

@@ -1,0 +1,9 @@
+.active-detail
+  .header
+    .title(:title="details.title") {{details.title}}
+    .time 活动时间: {{details.begin_time}}--{{details.end_time}}
+    .back(@click="goBack") 返回
+      i.el-icon-arrow-right
+  .content
+    img.cover(:src="details.cover")
+    .content_pc(v-html="details.content_pc")

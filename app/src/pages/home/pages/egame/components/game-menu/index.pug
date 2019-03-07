@@ -1,0 +1,11 @@
+div(:class="partnerClass")
+  .type-menu
+    swiper(:options="swiperOption" ref="swiper")
+      swiper-slide(v-for="item, index in menu" :key="index")
+        .item(:class="{active: current === item.id}" @click="changeGame(item)") 
+          img(:src="item.logo")
+          span {{item.name}}
+          .active_bg
+            span
+    .swiper-button-prev.swiper-button-white(@click="btnClick(1)")
+    .swiper-button-next.swiper-button-white(@click="btnClick(2)")

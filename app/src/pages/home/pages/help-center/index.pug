@@ -1,0 +1,13 @@
+.help-center
+  p {{selectIndex}}
+  .container(v-if="helpCenterData&&selectIndex>=0")
+    ul.menus
+      li(v-for="item,index in helpCenterData" :key="index" :class="{'active':selectIndex===index}" @click.stop.prevent="selectIndex=index") 
+        .icon
+          img(v-if="selectIndex===index" :src="require(`./img/${labelName[item.name].selectImg}`)")
+          img(v-else :src="require(`./img/${labelName[item.name].img}`)")          
+        .text 
+          p.t {{item.name}}
+          p {{labelName[item.name].english}}
+        .bg(v-if="selectIndex===index")
+    .content(v-html="content")

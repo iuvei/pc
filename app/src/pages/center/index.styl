@@ -1,0 +1,265 @@
+$header-bg-color = #E6382F // 弹窗头部背景色
+$header-title-color = #ffffff // 弹窗头部标题颜色
+$header-close-color = #ffffff // 弹窗头部关闭按钮文字颜色
+$menu-border-color = #E6382F // 左侧菜单选择时的左边框颜色
+$content-bg-color = #F5F5F5 // 弹窗内容背景颜色
+$loading-color = #E6382F // 加载中图标颜色
+$tab-color = #171717 // 标签栏文字颜色
+$tab-active-color = #E6382F // 标签栏选中时文字颜色
+$tab-bar-bg-color = #dddddd // 标签栏底部条的背景颜色
+$tab-bar-active-bg-color = #E6382F // 标签栏底部条的背景颜色
+$input-border-color = #ddd // 各种输入框的边框颜色
+$pagination-active-bg-color = #E6382F // 页码的数字框选中时背景色
+$pagination-hover-color = #E6382F // 页码的数字框鼠标触摸文字颜色
+
+.center
+  >>>
+    // .el-input input,
+    .el-textarea textarea
+      padding 12px 10px
+
+    .el-input--prefix .el-input__inner
+      padding-left 30px
+
+    .el-input--prefix .el-input__inner
+      padding-right 30px
+
+  >>>
+    // 充值，提款，一键回收 全部刷新
+    .recharge-btn
+      color #E6382F
+      border-color #E6382F
+
+      &:hover
+        background-color #E6382F
+        color #ffffff
+
+    .withdraw-btn
+      color #FEA923
+      border-color #FEA923
+
+      &:hover
+        background-color #FEA923
+        color #ffffff
+
+    .oneCycle-btn
+      color #66CB3C
+      border-color #66CB3C
+
+      &:hover
+        background-color #66CB3C !important
+        color #ffffff !important
+        border 1px solid #66CB3C !important
+
+    .all-refrash-btn
+      color #00D2D1
+      border-color #00D2D1
+
+      &:hover
+        background-color #00D2D1 !important
+        color #ffffff !important
+        border 1px solid #00D2D1 !important
+
+  >>>
+    .filter
+      overflow hidden
+      padding 13px 10px 0
+
+      .el-form, .query
+        float left
+
+      .el-form .el-form-item
+        height 100%
+        margin 0 0 15px 0
+        padding 0 20px 0 0
+
+        .el-form-item__label
+          font-size 12px
+          line-height 1
+          padding-bottom 9px
+          color #1B1D26
+
+        .el-form-item__content
+          .el-input__inner
+            height 40px
+            border-radius 2px
+
+      .query
+        margin-top 21px
+
+        .solid, .hollow
+          height 40px
+          width 90px
+          border-radius 3px
+
+      .el-input, .el-select
+        width 120px
+        height 100%
+
+    .table
+      padding 11px 10px 38px
+
+    .el-pagination__editor.el-input
+      width 50px !important
+
+    .el-pagination .el-select, .el-pagination .el-input
+      width 100px
+
+  >>>
+    .el-form-item__label, .el-form-item__content, .el-input__inner
+      // line-height 40px
+      height 100%
+
+    .el-form-item.is-required:not(.is-no-asterisk)>.el-form-item__label:before
+      font-size 16px
+      color #e6382f
+
+    .el-form-item__label
+      font-size 14px
+      color #1B1D26
+
+    .el-input, .el-select
+      width 240px
+      height 100%
+
+    .el-radio-group
+      line-height 40px
+
+    .el-radio.is-bordered
+      border-color #D3D4D6
+      padding 0
+
+    .el-radio.is-bordered.is-checked
+      border 1px solid #e6382f
+      background-color #FFE4E4
+
+    .el-textarea__inner
+      height 80px
+      width 240px
+      // border 1px solid $input-border-color
+
+    .el-form-item
+      height 40px
+      margin-bottom 20px
+
+    .el-dialog
+      .el-select .el-input .el-select__caret
+        font-size 12px
+
+      .el-dialog__body
+        padding 0 !important
+
+  .body-wrap
+    display flex
+
+    .menu-wrap
+      width 150px
+      height 700px
+      background-color #fff
+
+      .el-menu
+        border none
+        background-color #fff
+
+        >>>
+          .el-menu-item-group__title
+            padding-left 0px !important
+            margin-left 9px
+            border-bottom 1px solid rgba(221, 221, 2111, 0.3)
+            color #909399
+            font-size 12px
+
+        .el-menu-item
+          height 43px
+          line-height 43px
+          font-size 14px
+          transition none
+          color #1B1D26
+          border-left 4px solid transparent
+          font-weight bold
+
+          &.is-active
+            background-color #F0F0F0
+            border-left 4px solid $menu-border-color
+            color $menu-border-color
+
+          &:hover
+            background-color #F0F0F0
+
+          img
+            width 18px
+            margin-right 10px
+
+    .content-wrap
+      height 700px
+      width 1150px
+      background-color $content-bg-color
+      box-sizing border-box
+      -moz-box-sizing border-box
+      -webkit-box-sizing border-box
+      padding 20px
+
+      >>>
+        .el-icon-loading
+          color $loading-color
+
+        .el-tabs
+          margin-top -20px
+
+        .el-tabs__nav-scroll
+          padding-left 15px
+
+        .el-tabs__item
+          color $tab-color
+
+        .el-tabs__item.is-active
+          color $tab-active-color
+
+        .el-tabs__nav-wrap::after
+          background-color $tab-bar-bg-color
+
+        .el-tabs__active-bar
+          background-color $tab-bar-active-bg-color
+          padding 0 15px
+          left -15px
+
+        .el-table.el-table--border, .el-table td, .el-table th.is-leaf
+          border-color #ddd
+
+        .el-table th
+          height 36px
+
+        .el-table tr
+          height 40px
+
+        .el-table th
+          color #1B1D26
+
+        .el-table tbody tr:last-child td
+          border-bottom 1px solid #ddd
+
+        .el-table__body .cell
+          color #666666
+          display flex
+          align-items center
+
+        .el-table--enable-row-hover .el-table__body tr:hover>td
+          background-color #FFF7F7
+
+        .el-pagination
+          padding 15px 20px
+          background #fff
+          text-align right
+          border-color #dfdfdf
+          border-style solid
+
+          .el-pager li
+            font-size 12px
+            font-weight normal
+
+        .el-pagination.is-background .el-pager li:not(.disabled):hover
+          color $pagination-hover-color
+
+        .el-pagination.is-background .el-pager li:not(.disabled).active
+          background-color $pagination-active-bg-color
+          color #ffffff

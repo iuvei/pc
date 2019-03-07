@@ -1,0 +1,20 @@
+.lottery
+  .wrap
+    el-carousel(height="290px")
+      el-carousel-item(v-for="item, index in banners" :key="index")
+        a(v-if="item.link_pc" :href="item.link_pc" target="_blank")
+          img(:src="item.img_pc")
+        img(v-else :src="item.img_pc")
+    .game
+      .box(v-for="item, index in list" :key="index" @click="onEnterClick(item)")
+        .border
+        .desc(:class="getAPIName(item)")
+          .title-wrap
+            img(:src="getLogoImagePath(item)")
+            span {{ item.name }}
+          .info {{ item.remark }}
+        img(:src="getImagePath(item)")
+      template(v-if="list.length > 0 && list.length < 3")
+        .box.pending(v-for="i in 3 - list.length")
+          .title 敬请期待
+          .sub-title coming soon

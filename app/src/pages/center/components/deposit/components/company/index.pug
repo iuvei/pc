@@ -1,0 +1,84 @@
+.company-container( ref="page")
+  //- 充值表单提交页
+  .con(:style="{transform:isNext?'translateX(-1133px)':'translateX(0)'}")
+    .first-page
+      el-form.form(:model="formAdd" :rules="rules" ref="formAdd" label-width="120px")
+      
+        //- 银行卡    
+        el-form-item(label="收款类型:" prop="bank_id" :required="true")
+          el-radio-group.banklist(v-model="formAdd.bank_id")
+            el-radio(v-for="item,index in bankArr" :label="item.bank_id" border :key="index" :style="{backgroundImage: `url(${item.logo})`}") 
+        el-form-item.custom(label="收款账号:" prop="receive_bank_id")
+          el-radio-group(v-model="formAdd.receive_bank_id")
+            el-radio(v-for="card,index in bankCardInfo" :label="index" :key="index") {{card.bank_name}}({{card.card.substring(card.card.length-4)}})
+        el-form-item(label="充值金额:" prop="money")
+          el-input(v-model="formAdd.money" type="number" min="0" max="999999999" @input="inputMoneyFun" :placeholder="`输入范围${minDepositMoney}~${maxDepositMoney}`")
+          span  元
+          span.red （限额：{{minDepositMoney}}-{{maxDepositMoney}}）
+        
+        el-form-item(label="存款人:" prop="pay_name")
+          el-input(v-model="formAdd.pay_name" placeholder="请输入存款人")
+        el-form-item(label="存款说明:" prop="remark" style="height:80px")
+          el-input(v-model="formAdd.remark" type="textarea" placeholder="请输入存款说明(不超过50个字符)")
+        el-form-item.custom(label="可获得优惠:" prop="active_id" :required="true")
+          el-radio-group(v-model="formAdd.active_id")
+            template(v-for="item,index in data.active")
+              el-radio( :label="item.id" :key="index") {{item.title}}
+              span(v-if="item.id!==0") 可获得优惠{{$fmoney(reapProfit,2)}}元
+        el-form-item.recharge(label="充值:")
+          div
+            span.big.red ￥{{$fmoney((Number(formAdd.money)+decimal),2)}}
+            span （活动优惠
+            span.red(style="margin-left:0;padding:0 5px") {{$fmoney((formAdd.active_id!==0?reapProfit:0),2)}}
+            span  元）
+        el-form-item
+          el-button.submit.solid( @click="next") 下一步
+      .others
+        p.title 温馨提示：
+        p 1.为方便客服快速审核,平台会根据您填写的金额随机1～2位小数,转账时请按照最终显示金额进行充值。
+        p 2.收款账户不定期更新，避免存款至过期账号，请在每次存款前点击公司入款，感谢您的配合！
+        p(v-if="data.remark" v-html="'3.'+data.remark") 
+        
+    //- 回执页
+    .second-page(v-if="isNext")
+      .sec
+        .recharge
+          span 充值
+          span.red.big ￥{{$fmoney((Number(formAdd.money)+decimal),2)}}
+        .content(v-if="formAdd.receive_bank_id || formAdd.receive_bank_id===0")
+          .top-title 收款信息
+          el-form(:model="formAdd"  label-width="83px")
+            el-form-item(label="收款人:")
+              el-input(v-model="bankCardInfo[formAdd.receive_bank_id].name" :disabled="true")
+              el-button.copy.hollow(@click.stop.prevent="copyBankInfo(formAdd.pay_name)") 复制
+            el-form-item(label="收款账号:")
+              el-input(v-model="bankCardInfo[formAdd.receive_bank_id].card" :disabled="true")
+              el-button.copy.hollow(@click.stop.prevent="copyBankInfo(bankCardInfo[formAdd.receive_bank_id].card)") 复制              
+            el-form-item(label="收款方式:")
+              el-input(v-model="bankCardInfo[formAdd.receive_bank_id].bank_name" :disabled="true")
+            el-form-item(label="收款支行:")
+              el-input(v-model="bankCardInfo[formAdd.receive_bank_id].address" :disabled="true")
+          .qrcode(v-if="bankCardInfo[formAdd.receive_bank_id].qrcode")
+            .top 扫码转账
+            .img-wrap
+              img.img( :src="bankCardInfo[formAdd.receive_bank_id].qrcode")
+              img.line.tl(src="./../../recharge/img/qrcode-border.svg")
+              img.line.tr(src="./../../recharge/img/qrcode-border.svg")
+              img.line.bl(src="./../../recharge/img/qrcode-border.svg")
+              img.line.br(src="./../../recharge/img/qrcode-border.svg")
+        .btns
+          el-button.cancel.solid(@click="isNext=false") 取消
+          el-button.confirm.solid(@click="submitForm" :disabled="isSubmit") 已转账成功，提交回执
+          
+      .others
+        p.title 温馨提示：
+        p 1.为方便客服快速审核,平台会根据您填写的金额随机1～2位小数,转账时请按照最终显示金额进行充值。
+        p 2.收款账户不定期更新，避免存款至过期账号，请在每次存款前点击公司入款，感谢您的配合！
+        p(v-if="data.remark" v-html="'3.'+data.remark")
+        
+      
+            
+
+
+
+

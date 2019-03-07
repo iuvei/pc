@@ -1,0 +1,14 @@
+.game-list(:class="{isPage: isPage}")
+  .list(v-if="gamelist.length > 0")
+    .item(v-for="item, index in gamelist" :key="index")
+      .img
+        img(:src="item.img_url")
+      .text {{item.name}}
+      .collection(:class="{favorite: item.is_favorite}" @click="changeFavoriteStatus(item,index)")
+      .shadow
+        span(:class="{ demo: !item.support_demo || userType === '1' }" @click="onPlayClick(item)") 进入游戏
+        span.try(v-if="item.support_demo && userType != '1'" @click="onTryClick(item)") 试玩游戏
+  el-pagination(v-if="gamelist.length > 0" @size-change="onPageSizeChange" @current-change="onCurrentChange" :current-page="page" :page-size="size" layout="prev,pager,next" :total="total" background)
+  .notfound(v-else)
+    img(src="./img/notfound.png")
+    span 暂无数据

@@ -1,0 +1,70 @@
+.type-wrap
+  width 1200px
+  height 400px
+  display flex
+  justify-content space-between
+  margin 20px auto
+
+  .box
+    width 600px
+    height 400px
+    font-size 14px
+    position relative
+    cursor pointer
+    background-repeat no-repeat
+    background-position center center
+    background-size cover
+
+    &:hover
+      .border
+        opacity 1
+
+    .border
+      position absolute
+      opacity 0
+      transition opacity 0.2s ease
+      width 100%
+      height 100%
+      border 4px solid #FFDE01
+      box-sizing border-box
+      -moz-box-sizing border-box
+      -webkit-box-sizing border-box
+
+    .mask
+      width 100%
+      height 100%
+      position absolute
+
+      .btn
+        width 100px
+        height 36px
+        line-height 35px
+        background #fff
+        border-radius 18px
+        font-size 16px
+        text-align center
+        position relative
+        top 342px
+        left 50%
+        margin-left -50px
+        font-weight bold
+        letter-spacing 2px
+        text-indent 4px
+
+        &._1
+          color #00D2D1
+
+        &._2
+          color #5051EB
+
+        &._3
+          color #F29F1C
+
+        &._4
+          color #FB7040
+
+        &._5
+          color #66CB3C
+
+        &._6
+          color #C041C0

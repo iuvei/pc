@@ -1,0 +1,8 @@
+div
+  el-tabs(v-model="activeTab")
+    el-tab-pane(label="基本信息" name="baseInfo")
+      base-info(v-if="activeTab === 'baseInfo'")
+    el-tab-pane(label="个人资料" name="editInfo")
+      edit-info(v-if="activeTab === 'editInfo'")
+    el-tab-pane(label="银行管理" name="bankManage")
+      bank-manage(v-if="activeTab === 'bankManage'")

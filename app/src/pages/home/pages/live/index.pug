@@ -1,0 +1,39 @@
+.live
+  .wrap
+    .large-wrap
+      .large
+        .mask(v-if="list.length > 0")
+          .head-wrap
+            img.logo(:src="getLogoImagePath(list[0])")
+            .desc {{ list[0].remark }}
+          .btn(@click="onEnterClick(list[0])") 进入游戏
+          .box-wrap
+            .box(v-for="item, index in list[0].ting.slice(0, 6)" @click.stop.prevent="onTingClick(list[0], item.params)")
+              .icon
+              .title {{ item.name }}
+        img(v-if="list.length > 0" :src="getLargeImagePath(list[0])")
+      el-carousel(height="395px")
+        el-carousel-item(v-for="item, index in banners" :key="index")
+          a(v-if="item.link_pc" :href="item.link_pc" target="_blank")
+            img(:src="item.img_pc")
+          img(v-else :src="item.img_pc")
+    .small-wrap
+      .box(v-for="item, index in list.slice(1, 5)" :key="index" @click.stop.prevent="onEnterClick(item)")
+        .desc {{ item.remark }}
+        .border
+        .mask
+          .btn(:class="getAPIName(item)") 进入游戏
+        img(:src="getSmallImagePath(item)")
+      template(v-if="list.length > 0 && list.length < 5")
+        .box.pending(v-for="i in 5 - list.length")
+          img(src="./img/small/pending.png")
+    .small-wrap(v-if="list.length > 5")
+      .box(v-for="item, index in list.slice(5, 10)" :key="index" @click.stop.prevent="onEnterClick(item)")
+        .desc {{ item.remark }}
+        .border
+        .mask
+          .btn(:class="getAPIName(item)") 进入游戏
+        img(:src="getSmallImagePath(item)")
+      template(v-if="list.length > 5 && list.length < 9")
+        .box.pending(v-for="i in 9 - list.length")
+          img(src="./img/small/pending.png")

@@ -1,0 +1,35 @@
+.egame-sidebar(:style="{left: showBar ? '0' : '-320px'}" @mouseover="showBar = true" @mouseout="showBar = false")
+  .logo
+    img(:src="logo1" alt="logo")
+  .banner
+    img(src="./img/banner.jpg" alt="banner")
+  .tab-nav
+    .nav
+      i.el-icon-arrow-left
+      swiper(v-if="games && games.length > 0" ref="swiper" :options="swiperOption")
+        swiper-slide(v-for="item, index in games" :key="index" v-if="item.is_display")
+          .name(
+            :class="{ active: activeType === index }"
+            @click="onTypeClick(index)"
+          ) {{ item.name }}
+      i.el-icon-arrow-right
+    .toggle-btn
+      template(v-if="showBar")
+        i.el-icon-caret-left
+        div 收起
+      template(v-else)
+        i.el-icon-caret-right
+        div 展开
+  .list-warp
+    .tab-con(v-if="games && games[activeType]")
+      .tab-con-list
+        .tab-con-item(
+          v-for="item, index in games[activeType].list"
+          :key="index"
+          @click="onGameClick(item)")
+          img.icon(:src="getImgUrl(item)" :alt="item.iconkey")
+          .name {{item.name}}
+          img.hot(src="./img/hot.png" v-if="item.is_hot" alt="hot")
+          img.active(src="./img/active.png" v-if="item.is_active" alt="active")
+      
+
